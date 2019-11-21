@@ -1,0 +1,21 @@
+/* pages/wxlogin/auth1.wxss */
+page {
+  width: 100vw;
+  height: 100vh;
+  background: #fff;
+}
+
+.btnv {
+  top: -230rpx;
+  width: 510rpx;
+  height: 100rpx;
+  position: relative;
+  left: 0rpx;
+  border-radius: 10rpx;  
+  opacity: 0;
+}
+
+.btnv::after{
+  border: none;
+  opacity: 0;
+}

@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "tabbar": "../../components/tabbar/index",
+    "calendar": "../../components/calendar/index",
+    "slideview": "../../components/slideview/slideview",
+    "searchbar": "../../components/searchbar/searchbar",
+    "policycom": "../../components/policy/index"
+  }
+}

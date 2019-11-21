@@ -1,0 +1,69 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/my/index",
+    "pages/fabu/index",
+    "pages/search/index",
+    "pages/dongtai/index",
+    "pages/dongtai/detail",
+    "pages/user/index",
+    "pages/about/index",
+    "pages/pingjia/index",
+    "pages/wxlogin/auth",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "陪否",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#101010",
+    "selectedColor": "#ff9800",
+    "borderStyle": "white",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页",
+        "iconPath": "/resources/home.png",
+        "selectedIconPath": "/resources/homeh.png"
+      },
+      {
+        "pagePath": "pages/fabu/index",
+        "text": "",
+        "iconPath": "/resources/fabu.png",
+        "selectedIconPath": "/resources/fabu.png"
+      },
+      {
+        "pagePath": "pages/my/index",
+        "text": "我的",
+        "iconPath": "/resources/my.png",
+        "selectedIconPath": "/resources/myh.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 20000,
+    "connectSocket": 20000,
+    "uploadFile": 60000,
+    "downloadFile": 60000
+  },
+  "plugins": {},
+  "debug": true,
+  "navigateToMiniProgramAppIdList": [
+    "wx40677f4832def843"
+  ],
+  "permission": {
+    "scope.userLocation": {
+      "desc": "获取您位置，为您提供更好的服务"
+    }
+  },
+  "requiredBackgroundModes": [
+    "audio",
+    "location"
+  ],
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="15px" viewBox="0 0 16 15" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55 (78076) - https://sketchapp.com -->
+    <title>关  闭</title>
+    <desc>Created with Sketch.</desc>
+    <g id="页面1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="首页全长备份-7" transform="translate(-312.000000, -128.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="关--闭" transform="translate(312.000000, 127.000000)">
+                <rect id="矩形" opacity="0" x="0" y="0" width="16" height="16"></rect>
+                <path d="M9.112,8.184 L14.976,2.32 C15.272,2.024 15.272,1.536 14.976,1.24 L14.944,1.208 C14.648,0.912 14.16,0.912 13.864,1.208 L8,7.08 L2.136,1.208 C1.84,0.912 1.352,0.912 1.056,1.208 L1.024,1.24 C0.72,1.536 0.72,2.024 1.024,2.32 L6.888,8.184 L1.024,14.048 C0.728,14.344 0.728,14.832 1.024,15.128 L1.056,15.16 C1.352,15.456 1.84,15.456 2.136,15.16 L8,9.296 L13.864,15.16 C14.16,15.456 14.648,15.456 14.944,15.16 L14.976,15.128 C15.272,14.832 15.272,14.344 14.976,14.048 L9.112,8.184 Z" id="路径"></path>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,19 @@
+/**app.wxss**/
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding: 200rpx 0;
+  box-sizing: border-box;
+} 
+
+/*引入weui.wxss*/
+@import "styles/weui.wxss";
+
+/*引入动画*/
+@import "styles/animation.wxss";
+
+/*引入字体库图标*/
+@import "styles/icon.wxss";
