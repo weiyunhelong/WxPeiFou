@@ -1,5 +1,14 @@
 <!--pages/wxlogin/auth1.wxml-->
-<image src='https://oss-cn-shanghai.aliyuncs.com/connectplus/origin/201903/8404c774ff4ed006dbd30e0237edf909.png' mode='widthFix' style='width:100vw;'></image>
+<view class="slogan">『陪否』—— 即刻找到你正想要的陪伴</view>
+<view class="logov">
+  <image src="/resources/logo.png" class="logo"></image>
+</view>
 
 
-<button open-type='getUserInfo' lang="zh_CN" bindgetuserinfo="onGotUserInfo" class='btnv'></button>
+<button open-type='getUserInfo' lang="zh_CN" bindgetuserinfo="onGotUserInfo" class='btnv' style="margin-top:65rpx;">授权登录</button>
+
+<button open-type='getPhoneNumber' lang="zh_CN" bindgetphonenumber="getphonenumber" class='btnv' style="margin-top:25rpx;">手机号码</button>
+
+<textarea class="introduce" placeholder="个人简介" bindinput="getintroduce" value="{{introduce}}"></textarea>
+
+<button class="okbtn" bindtap="postopt">完成</button>

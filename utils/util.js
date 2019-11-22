@@ -28,8 +28,21 @@ const getTime = date => {
   return [year, month, day].map(formatNumber).join('/')
 }
 
-
+//提示
+const ShowAlert=(type,msg)=>{
+  if(type==1){
+    wx.showToast({
+      title: msg,
+    })
+  }else{
+    wx.showToast({
+      title: msg,
+      icon:'none'
+    })
+  }
+}
 module.exports = {
   formatTime: formatTime,
   getTime: getTime,
+  ShowAlert:ShowAlert
 }

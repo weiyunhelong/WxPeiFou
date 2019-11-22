@@ -1,8 +1,7 @@
 // pages/wxlogin/auth.js
-var requesturl = getApp().globalData.DBCrequesturl; //接口请求的地址
+var requesturl = getApp().globalData.DBrequesturl; //接口请求的地址
 var WxRequest = require('../../utils/WxRequest.js'); //请求接口
-var DAtool = require('../../utils/DA.js'); //统计接口
-
+var Tools = require('../../utils/util.js'); //提示
 
 Page({
 
@@ -10,114 +9,73 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    avatarUrl: '', //头像
+    nickName: '', //昵称
+    phone: '', //手机号码
+    introduce: '', //个人简介
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    if (getApp().globalData.campaignUrl == undefined) {
-      var t = getApp().getTracker();
-      // 解析options中的 utm_xxxxxx 参数，生成一个广告连接 URL
-      var campaignUrl = CampaignParams.parseFromPageOptions(options).toUrl();
-      //console.log("链接地址:" + campaignUrl);
-      getApp().globalData.campaignUrl = campaignUrl;
-    } else {
-      var campaignUrl = getApp().globalData.campaignUrl;
-      //console.log("链接地址:" + campaignUrl);
-      getApp().globalData.campaignUrl = campaignUrl;
-    }
+
   },
-  //获取用户授权
-  onGotUserInfo: function(e) {
+  onGotUserInfo(e) { //授权登录
+
     var that = this;
-    console.log("授权用户信息:");
-    console.log(e);
-    wx.showLoading({
-      title: '登录中...',
-      mask:true
-    })
+    console.log("授权用户信息:", e);
 
     //全局变量，用户信息
     getApp().globalData.userInfo = e.detail.userInfo;
 
-    //参数部分
-    var url = requesturl + '/auth/wechat/decrypt',
-      params = {
-        encryptedData: e.detail.encryptedData,
-        iv: e.detail.iv,
-        session_key: getApp().globalData.Token,
-        store_id: getApp().globalData.store_id
-      };
-
-    //请求接口，获取用户UNIONID的信息
-    WxRequest.PostRequest(url, params).then((res) => {
-      WxRequest.ConsoleLog("获取用户UNIONID的信息:");
-      WxRequest.ConsoleLog(res);
-      if (res.data.unionId == "" || res.data.unionId == null || res.data.unionId == undefined || res.data.unionId =="0") {
-        wx.showModal({
-          title: '提示',
-          content: '授权失败',
-          showCancel: false
-        })
-      } else {
-        getApp().globalData.unionid = res.data.unionId;
-        //更新微信用户信息
-        that.UpdateWxUserInfo();
-        //打标签
-        that.InitView();
-      }
-
-      //结束标识符
-      wx.hideLoading();
-    }).catch((errMsg) => {
-      WxRequest.ConsoleLog("获取用户UNIONID的信息error:");
-      WxRequest.ConsoleLog(errMsg);
-      wx.hideLoading();
-    });
+    that.setData({
+      avatarUrl: e.detail.userInfo.avatarUrl, //头像
+      nickName: e.detail.userInfo.nickName, //昵称
+    })
+    Tools.ShowAlert(1,"授权成功");
   },
-  //更新微信用户信息
-  UpdateWxUserInfo: function() {
+  getphonenumber(e) { //手机号码
     var that = this;
+    console.log("手机号码信息:", e);
 
+    var params = {
+      encryptedData: e.detail.encryptedData,
+      iv: e.detail.iv,
+    };
+    //TODO 后台解密获取手机号码
+    that.setData({
+      phone: ''
+    })
+    Tools.ShowAlert(1, "手机号获取成功");
+  },
+  getintroduce(e) { //个人简介
+    var that = this;
+    that.setData({
+      introduce: e.detail.value
+    })
+  },
+  postopt() { //点击完成
     var that = this;
     //参数部分
-    var url = requesturl + '/cplus/wechat/user',
-      params = {
-        userInfo: JSON.stringify(getApp().globalData.userInfo),
-        openid: getApp().globalData.openId,
-        store_id: getApp().globalData.store_id,
-        union_id: getApp().globalData.unionid
-      };
+    var avatarUrl = that.data.avatarUrl, //头像
+      nickName = that.data.nickName, //昵称
+      phone = that.data.phone, //手机号码
+      introduce = that.data.introduce; //个人简介
 
-    //请求接口，更新微信用户信息
-    WxRequest.PostRequest(url, params).then((res) => {
-      WxRequest.ConsoleLog("更新微信用户信息:");
-      WxRequest.ConsoleLog(res);
+    if (that.data.nickName == "") {
+      Tools.ShowAlert(0,"请点击授权登录");
+    } else if (that.data.phone == "") {
+      Tools.ShowAlert(0,"请点击手机号码");
+    } else if (that.data.introduce == "") {
+      Tools.ShowAlert(0,"请完善个人简介");
+    } else {
+      //TODO 提交数据，返回前一个页面
 
-    }).catch((errMsg) => {
-      WxRequest.ConsoleLog("更新微信用户信息error:");
-      WxRequest.ConsoleLog(errMsg);
-    });
-  },
-  //打标签
-  InitView: function() {
-    //打开小程序打标签
-    var that = this;
-    WxRequest.AddTag('eshop', 'open', 'miniprogram', 'Eshop精品商城').then((res) => {
-      WxRequest.ConsoleLog("打标签成功");
-      //跳转到首页
-      wx.reLaunch({
-        url: '../home/index',
+      wx.navigateBack({
+        delta: 1
       })
-    }).catch((errMsg) => {
-      WxRequest.ConsoleLog("打标签失败");
-      //跳转到首页
-      wx.reLaunch({
-        url: '../home/index',
-      })
-    });
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

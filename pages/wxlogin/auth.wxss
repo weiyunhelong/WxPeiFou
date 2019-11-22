@@ -1,21 +1,52 @@
 /* pages/wxlogin/auth1.wxss */
-page {
+
+.slogan {
   width: 100vw;
-  height: 100vh;
-  background: #fff;
+  text-align: center;
+  font-size: 36rpx;
+  color: #ff9800;
+  margin-top: 51rpx;
+}
+
+.logov {
+  width: 100vw;
+  text-align: center;
+  margin-top: 65rpx;
+}
+
+.logo {
+  width: 380rpx;
+  height: 380rpx;
 }
 
 .btnv {
-  top: -230rpx;
-  width: 510rpx;
-  height: 100rpx;
-  position: relative;
-  left: 0rpx;
-  border-radius: 10rpx;  
-  opacity: 0;
+  width: 400rpx;
+  height: 72rpx;
+  border-radius: 6rpx;
+  line-height: 72rpx;
+  font-size: 32rpx;
+  color: #ff9800;
+  border: 2rpx solid #ff9800;
+  background: #fff;
 }
 
-.btnv::after{
-  border: none;
-  opacity: 0;
+.introduce {
+  width: 372rpx;
+  height: 92rpx;
+  margin: 25rpx auto;
+  border: 2rpx solid #ff9800;
+  padding: 16rpx 14rpx;
+  font-size: 28rpx;
+  border-radius: 6rpx;
+}
+
+.okbtn {
+  width: 400rpx;
+  height: 72rpx;
+  border-radius: 6rpx;
+  line-height: 72rpx;
+  font-size: 36rpx;
+  color: #fff;
+  background: #ff9800;
+  margin-top: 97rpx;
 }

@@ -1,14 +1,1 @@
-/**index.wxss**/
-
-page {
-  background: #fafafa;
-}
-
-.delv {
-  width: 100vw;
-  height: 88rpx;
-  background: blue;
-  font-size: 28rpx;
-  line-height: 88rpx;
-  color: #fff;
-}
+/* pages/home/index.wxss */
