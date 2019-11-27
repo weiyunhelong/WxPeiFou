@@ -1,0 +1,65 @@
+/* components/diary/index.wxss */
+
+.rijiv {
+  margin-top: 24rpx;
+  width: 346rpx;
+}
+
+.cover {
+  width: 346rpx;
+  height: 504rpx;
+}
+
+.title {
+  font-size: 28rpx;
+  color: #101010;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.date {
+  font-size: 16rpx;
+  color: #ccc9c5;
+  margin-bottom: 10rpx;
+}
+
+.userv {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.linfo {
+  display: flex;
+}
+
+.tximg {
+  width: 40rpx;
+  height: 40rpx;
+  border-radius: 20rpx;
+}
+
+.name {
+  font-size: 24rpx;
+  color: #8c8c8c;
+  line-height: 40rpx;
+}
+
+.rdata {
+  display: flex;
+}
+
+.zanicon {
+  width: 30rpx;
+  height: 30rpx;
+  margin-top: 5rpx;
+}
+
+.zannum {
+  font-size: 24rpx;
+  color: #ff9800;
+  line-height: 40rpx;
+  margin-right: 24rpx;
+  margin-left: 10rpx;
+}

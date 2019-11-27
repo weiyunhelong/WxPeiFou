@@ -1,2 +1,14 @@
 <!--pages/home/index.wxml-->
-<text>pages/home/index.wxml</text>
+
+<!---->
+<view class="diaryv">
+  <view class="leftv">
+    <diarycom />
+  </view>
+
+  <view class="rightv">
+    <diarycom />
+  </view>
+</view>
+
+<morebtncom />

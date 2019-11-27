@@ -1,0 +1,19 @@
+<!--components/dynamic/index.wxml-->
+<view class="recordv" bindtap="godetail">
+  <image src="/resources/tx.jpeg" mode="aspectFit" class="tximg"></image>
+  <view class="infov">
+    <view class="title">我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想
+    </view>
+    <view class="price">免费</view>
+    <view class="optv">
+      <view class="optinfo">
+        <view class="addressv">
+           <view class="areav">万科小区</view>
+           <view class="juliv">／离你100m</view>
+        </view>
+        <view class="date">2019.11.19 15:00-20:00</view>
+      </view>
+      <view class="chkbtn">点击查看</view>
+    </view>
+  </view>
+</view>

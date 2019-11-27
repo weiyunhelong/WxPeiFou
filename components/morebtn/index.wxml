@@ -1,0 +1,3 @@
+<!--components/morebtn/index.wxml-->
+
+<view class="morebtn" bindtap="gosearch">显 示 更 多</view>

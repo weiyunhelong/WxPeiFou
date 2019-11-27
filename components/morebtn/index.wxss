@@ -1,0 +1,14 @@
+/* components/morebtn/index.wxss */
+
+.morebtn {
+  width: 710rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+  text-align: center;
+  border: 1rpx solid #ff9800;
+  font-size: 36rpx;
+  color: #ff9800;
+  margin: 12rpx auto 0;
+}
