@@ -17,3 +17,6 @@
 
 /*引入字体库图标*/
 @import "styles/icon.wxss";
+
+/*引入字体库图标*/
+@import "styles/fontsome.wxss";

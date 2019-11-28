@@ -1,6 +1,11 @@
 <!--pages/home/index.wxml-->
+<!--搜索框-->
+<view class="searchv">
+  <view class="postiov"></view>
+  <view class="datev"></view>
+</view>
 
-<!---->
+<!--日记部分-->
 <view class="diaryv">
   <view class="leftv">
     <diarycom />
@@ -10,5 +15,5 @@
     <diarycom />
   </view>
 </view>
-
+<!--显示更多-->
 <morebtncom />
