@@ -66,8 +66,12 @@ App({
     // 登录,获取openid
     that.GetWxOpenId();
   },  
+  onHide: function (options){
+    console.log("AAAA");
+  },
   globalData: {
     userInfo: null, //微信用户信息
+    AddressApi: "https://api.map.baidu.com", //根据经纬度获取城市
     DBrequesturl: "https://uat-gateway.connectplus.asaplus.com.cn", //API接口
     openId: "", //OPENID
     Token: "", //session_key

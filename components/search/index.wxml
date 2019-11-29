@@ -1,2 +1,35 @@
 <!--components/search/index.wxml-->
-<text>components/search/index.wxml</text>
+
+<!--搜索框-->
+<view class="searchcv">
+  <view class="postiov">
+    <icon type="search" size="20" color="#A6A6AA" class="searchicon" />
+    <view class="cityv">{{city}}</view>
+    <view class="searchv">
+      <input type="text" placeholder="地址/需要陪伴的关键词" placeholder-class="searchtip" class="searcht" value="{{searchkey}}" bindinput="getsearchkey" bindconfirm="getsearchkey"></input>
+      <button bindtap="getpostion" class="postion">定位</button>
+    </view>
+  </view>
+  <view class="datev">
+    <image src="/resources/rili.png" class="riliicon"></image>
+    <picker mode="date" value="{{date}}" start="{{today}}" bindchange="bindDateChange">
+      <view class="picker" style="width:230rpx;">
+        {{date}}
+      </view>
+    </picker>
+    <picker mode="time" value="{{starttime}}" bindchange="bindStartTimeChange">
+      <view class="picker">
+        {{starttime}}
+      </view>
+    </picker>
+    <view class="timeline">-</view>
+
+    <picker mode="time" value="{{endtime}}" bindchange="bindEndTimeChange">
+      <view class="picker" style="width:100rpx;">
+        {{endtime}}
+      </view>
+    </picker>
+  </view>
+</view>
+
+<view class="searchbtn" bindtap="searchopt">搜索</view>

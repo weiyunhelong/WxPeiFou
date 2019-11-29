@@ -86,6 +86,14 @@ function getNowTime() {
   return [hour, minute].map(formatNumber).join(':')
 }
 
+//得到当前的时间 时分秒
+function getNowNextTime() {
+  var date = new Date();
+  var hour = date.getHours()+1;
+  var minute = date.getMinutes();
+  return [hour, minute].map(formatNumber).join(':')
+}
+
 //得到月份的天数
 function getDayNum(year,month) {
  var result=30;
@@ -227,6 +235,7 @@ module.exports = {
   formatTime: formatTime,//时间的格式化
   getNowDate: getNowDate,//得到当前的日期:2018-03-28
   getNowTime: getNowTime,//得到当前的时间:18:08
+  getNowNextTime: getNowNextTime,//得到当前的时间下一个小时:19:08
   getMorenDate: getMorenDate,//得到当前的时间:2018年03月28日
   getSelectDate: getSelectDate,//转化为时间2018年03月28日
   getCompairDate:getCompairDate,//比较时间的大小 

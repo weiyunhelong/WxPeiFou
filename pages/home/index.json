@@ -1,5 +1,6 @@
 {
   "usingComponents": {
+    "searchcom": "../../components/search/index",
     "dynamiccom":"../../components/dynamic/index",
     "diarycom": "../../components/diary/index",
     "morebtncom": "../../components/morebtn/index"

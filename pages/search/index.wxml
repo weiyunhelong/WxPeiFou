@@ -1,2 +1,2 @@
 <!--pages/search/index.wxml-->
-<text>pages/search/index.wxml</text>
+<searchcom receiveData="{{searchparams}}" bindsearchopt="searchopt"/>

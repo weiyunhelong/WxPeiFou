@@ -1,8 +1,118 @@
 /* pages/home/index.wxss */
-.diaryv{
+
+/*搜索部分*/
+
+.searchcv {
+  width: 100vw;
+  margin: 12rpx 0 20rpx 0;
+}
+
+.searchicon {
+  margin: 25rpx 0rpx 25rpx 20rpx;
+  display: block;
+}
+
+.postiov {
+  width: 710rpx;
+  height: 90rpx;
+  margin: 0 auto;
+  display: flex;
+  border: 1rpx solid #aaa;
+  border-radius: 10rpx;
+}
+
+.cityv {
+  width: 120rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-right: 1rpx solid #aaa;
+  font-size: 28rpx;
+  color: #ff9800;
+}
+
+.searchv {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20rpx;
+}
+
+.searcht {
+  width: 400rpx;
+  font-size: 28rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  color: #ff9800;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.searchtip {
+  height: 90rpx;
+  line-height: 90rpx;
+  color: #aaa;
+}
+
+.postion {
+  width: 80rpx;
+  font-size: 28rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  color: #ff9800;
+  text-align: center;
+}
+
+.datev {
+  width: 710rpx;
+  height: 90rpx;
+  margin: 8rpx auto;
+  display: flex;
+  border: 1rpx solid #aaa;
+  border-radius: 10rpx;
+}
+
+.riliicon {
+  width: 50rpx;
+  height: 50rpx;
+  margin: 20rpx;
+}
+
+.picker {
+  line-height: 90rpx;
+  font-size: 28rpx;
+  color: #ff9800;
+}
+
+.timeline {
+  width: 10rpx;
+  height: 90rpx;
+  color: #ff9800;
+  line-height: 90rpx;
+}
+
+.searchbtn {
+  width: 710rpx;
+  height: 90rpx;
+  background-color: #ff9800;
+  color: #fff;
+  text-align: center;
+  font-size: 36rpx;
+  line-height: 90rpx;
+  margin: 0 auto;
+  border-radius: 10rpx;
+}
+
+/*日记部分*/
+
+.diaryv {
   display: flex;
   width: 100vw;
 }
+
 .leftv {
- margin:0 14rpx 0 24rpx;
+  margin: 0 14rpx 0 24rpx;
 }
