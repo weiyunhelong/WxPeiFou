@@ -70,6 +70,7 @@ App({
     console.log("AAAA");
   },
   globalData: {
+    hasUserInfo:false,//用户信息是否完整
     userInfo: null, //微信用户信息
     AddressApi: "https://api.map.baidu.com", //根据经纬度获取城市
     DBrequesturl: "https://uat-gateway.connectplus.asaplus.com.cn", //API接口
