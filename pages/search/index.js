@@ -12,7 +12,8 @@ Page({
       endtime: "",
       today: "",
       searchtype: 1
-    }
+    },
+    moretype:0,//1->寻找 2->提供 3->日记
   },
   searchopt(e) { //搜索操作
     console.log("搜索的参数接收:", e);
@@ -22,6 +23,14 @@ Page({
    */
   onLoad: function(options) {
     var that = this;
+    var moretype=options.type;
+    var searchtype=moretype == undefined ? 0 : parseInt(moretype)
+
+    console.log("参数", options, moretype, searchtype);
+
+    that.setData({
+      moretype: searchtype
+    })
     wx.getStorage({
       key: 'searchopt',
       success: function(res) {
@@ -36,7 +45,7 @@ Page({
           today: "",
           searchtype: 1
         }
-        
+
         that.setData({
           searchparams: searchparams
         })

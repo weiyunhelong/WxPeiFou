@@ -1,16 +1,16 @@
 <!--components/diary/index.wxml-->
 <view class="rijiv" bindtap="godetail">
-  <image src="/resources/riji.jpg" class="cover" mode="aspectFit"></image>
-  <view class="title">篮球攻略</view>
-  <view class="date">2019.11.19</view>
+  <image src="{{cover}}" class="cover" mode="aspectFit"></image>
+  <view class="title">{{title}}</view>
+  <view class="date">{{date}}</view>
   <view class="userv">
     <view class="linfo">
-      <image src="/resources/tx.jpeg" mode="aspectFit" class="tximg"></image>
-      <view class="name">小美</view>
+      <image src="{{avatarUrl}}" mode="aspectFit" class="tximg"></image>
+      <view class="name">{{nickName}}</view>
     </view>
     <view class="rdata">
       <image src="/resources/zan.png" class="zanicon"></image>
-      <view class="zannum">100</view>
+      <view class="zannum">{{zannum}}</view>
     </view>
   </view>
 </view>

@@ -3,15 +3,36 @@
 <!--搜索框-->
 <searchcom receiveData="{{searchparams}}" />
 
+<!--寻找陪伴-->
+<view class="category">寻找陪伴</view>
+
+<block wx:for="{{looks}}" wx:key="item">
+  <dynamiccom receiveData="{{item}}" />
+</block>
+
+<morebtncom  receiveData="{{1}}"/>
+
+<!--提供陪伴-->
+<view class="category">提供陪伴</view>
+
+<block wx:for="{{provides}}" wx:key="item">
+  <dynamiccom receiveData="{{item}}" />
+</block>
+<morebtncom receiveData="{{2}}"/>
+
 <!--日记部分-->
-<!-- <view class="diaryv">
+<view class="diaryv">
   <view class="leftv">
-    <diarycom />
+    <block wx:for="{{diarys}}" wx:key="item" wx:for-index="x">
+      <diarycom receiveData="{{item}}" wx:if="{{x%2==0}}" />
+    </block>
   </view>
 
   <view class="rightv">
-    <diarycom />
+    <block wx:for="{{diarys}}" wx:key="item" wx:for-index="x">
+      <diarycom receiveData="{{item}}" wx:if="{{x%2!=0}}" />
+    </block>
   </view>
-</view> -->
-<!--显示更多-->
-<!-- <morebtncom /> -->
+</view>
+
+<morebtncom receiveData="{{3}}"/>
