@@ -21,7 +21,8 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    btntype: 1,
+    hasUserInfo: getApp().globalData.hasUserInfo,
   },
 
   /**
@@ -30,9 +31,15 @@ Component({
   methods: {
     gosearch() { //点击显示更多
       var that = this;
-      wx.navigateTo({
-        url: '../../pages/search/index?type=' + that.data.btntype,
-      })
+      if (!that.data.hasUserInfo) {
+        wx.navigateTo({
+          url: '../wxlogin/auth',
+        })
+      } else {
+        wx.navigateTo({
+          url: '../../pages/search/index?type=' + that.data.btntype,
+        })
+      }
     },
   }
 })

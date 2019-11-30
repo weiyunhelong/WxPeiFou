@@ -29,6 +29,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    hasUserInfo: getApp().globalData.hasUserInfo,
     id: 0,
     avatarUrl: '',
     title: '',
@@ -46,9 +47,15 @@ Component({
   methods: {
     godetail() { //点击跳转到动态详情
       var that = this;
-      wx.navigateTo({
-        url: '../../pages/dongtai/index?id=' + that.data.id,
-      })
+      if (!that.data.hasUserInfo) {
+        wx.navigateTo({
+          url: '../wxlogin/auth',
+        })
+      } else {
+        wx.navigateTo({
+          url: '../../pages/dongtai/index?id=' + that.data.id,
+        })
+      }
     },
   }
 })

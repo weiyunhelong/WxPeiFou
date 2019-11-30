@@ -14,6 +14,8 @@ Page({
       searchtype: 1
     },
     moretype:0,//1->寻找 2->提供 3->日记
+    pageindex:1,
+    pagesize:10,
   },
   searchopt(e) { //搜索操作
     console.log("搜索的参数接收:", e);
@@ -26,31 +28,10 @@ Page({
     var moretype=options.type;
     var searchtype=moretype == undefined ? 0 : parseInt(moretype)
 
-    console.log("参数", options, moretype, searchtype);
-
     that.setData({
       moretype: searchtype
     })
-    wx.getStorage({
-      key: 'searchopt',
-      success: function(res) {
-        console.log("搜索操作:", res);
-
-        var searchparams = {
-          searchkey: res.data.searchkey,
-          date: res.data.date,
-          city: res.data.city,
-          starttime: res.data.starttime,
-          endtime: res.data.endtime,
-          today: "",
-          searchtype: 1
-        }
-
-        that.setData({
-          searchparams: searchparams
-        })
-      },
-    })
+    
   },
 
   /**
@@ -64,7 +45,29 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    var that=this;
 
+    wx.getStorage({
+      key: 'searchopt',
+      success: function (res) {
+      
+        var searchparams = {
+          searchkey: res.data.searchkey,
+          date: res.data.date,
+          city: res.data.city,
+          starttime: res.data.starttime,
+          endtime: res.data.endtime,
+          today: "",
+          searchtype: 1
+        }
+
+        that.setData({
+          searchparams: searchparams
+        })
+
+        wx.clearStorage();
+      },
+    })
   },
 
   /**

@@ -45,7 +45,7 @@ Page({
     };
     //TODO 后台解密获取手机号码
     that.setData({
-      phone: ''
+      phone: '18817383618'
     })
     Tools.ShowAlert(1, "手机号获取成功");
   },
@@ -71,7 +71,7 @@ Page({
       Tools.ShowAlert(0,"请完善个人简介");
     } else {
       //TODO 提交数据，返回前一个页面
-
+      getApp().globalData.hasUserInfo=true;
       wx.navigateBack({
         delta: 1
       })

@@ -1,2 +1,166 @@
 <!--pages/fabu/index.wxml-->
-<text>pages/fabu/index.wxml</text>
+<!--TAB-->
+<view class="tabv">
+  <view class="{{chktab==1?'chktabv':'nochktabv'}}" bindtap="chktabopt" data-tab="1">发布陪伴</view>
+  <view class="{{chktab==2?'chktabv':'nochktabv'}}" bindtap="chktabopt" data-tab="2">发布动态</view>
+</view>
+
+<!--陪伴部分-->
+<block wx:if="{{chktab==1}}">
+
+  <view class="optv">
+    <view class="opttitle">标题：</view>
+    <view class="optinfo">
+      <input type="text" placeholder="（必填）例：我想找人陪伴打篮球" placeholder-class="tip" class="txt" value="{{title}}" bindinput="gettitle"></input>
+    </view>
+  </view>
+
+  <view class="optv">
+    <view class="opttitle">详情：</view>
+    <view class="optinfo">
+      <textarea placeholder="（选填）提醒：详细介绍会更加快速容易找到你想要的陪伴......" placeholder-class="moretip" class="moretxt" value="{{desc}}" bindinput="getdesc"></textarea>
+    </view>
+  </view>
+
+  <view class="optv">
+    <view class="opttitle">日期：</view>
+    <view class="optinfo">
+      <image src="/resources/rili.png" class="riliicon"></image>
+      <picker mode="date" value="{{date}}" start="{{today}}" bindchange="bindDateChange">
+        <view class="picker" style="width:230rpx;">
+          {{date}}
+        </view>
+      </picker>
+    </view>
+  </view>
+
+  <view class="optv">
+    <view class="opttitle">时间段：</view>
+    <view class="optinfo">
+
+      <picker mode="time" value="{{starttime}}" bindchange="bindStartTimeChange">
+        <view class="timepicker">
+          开始：{{starttime}}
+        </view>
+      </picker>
+      <view class="timeline"></view>
+      <picker mode="time" value="{{endtime}}" bindchange="bindEndTimeChange">
+        <view class="timepicker">
+          结束：{{endtime}}
+        </view>
+      </picker>
+
+    </view>
+  </view>
+
+  <view class="optv">
+    <view class="opttitle">地点：</view>
+    <view class="optinfo" bindtap="golocation">
+      <image src="/resources/map.png" class="mapicon"></image>
+      <input type="text" disabled="{{true}}" class="txt" value="{{address}}" style="width:80%;"></input>
+    </view>
+  </view>
+
+  <view class="optv">
+    <view class="opttitle">人数：</view>
+    <view class="optinfo">
+      <input type="number" class="txt" value="{{num}}" bindinput="getnumber"></input>
+    </view>
+  </view>
+
+  <view class="optv">
+    <view class="opttitle">价格：</view>
+    <view class="optinfo">
+      <input type="number" class="txt" value="{{money}}" bindinput="getmoney" placeholder="此处填写数字,如: 50,不填默认为免费" placeholder-class="tip"></input>
+    </view>
+  </view>
+
+  <view class="optv">
+    <view class="opttitle"></view>
+    <view class="optinfo" style="border:none">
+      <view class="optionv" data-type="1" bindtap="chktype">
+        <view class="chkmodal" wx:if="{{type==1}}"></view>
+        <view class="nochkmodal" wx:else></view>
+        <view class="optiont">佣金</view>
+        <view class="optiontip">（
+          <text style="color:#ff9800;">提供</text>陪伴时可收取）</view>
+      </view>
+      <view class="optionv" style="margin-top:20rpx;" data-type="2" bindtap="chktype">
+
+        <view class="chkmodal" wx:if="{{type==2}}"></view>
+        <view class="nochkmodal" wx:else></view>
+        <view class="optiont">赏金</view>
+        <view class="optiontip">（
+          <text style="color:#ff9800;">寻找</text>陪伴时可收取）</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="optv">
+    <view class="opttitle">手机号：</view>
+    <view class="optinfo">
+      <input type="number" placeholder="（必填）" placeholder-class="tip" class="txt" value="{{phone}}" bindinput="getphone" maxlength="11"></input>
+    </view>
+  </view>
+
+  <view class="optvv">
+    <view class="opttitlec">微信二维码：</view>
+    <view class="opttitlev" style=" margin-left: -30rpx;">（建议尺寸200X200）</view>
+    <view class="optinfov" wx:if="{{wxcode==''}}" bindtap="choosewxcode">
+      <image src="/resources/add.png" class="addicon"></image>
+    </view>
+    <image src="{{wxcode}}" mode="aspectFit" class="optinfov" wx:else bindtap="choosewxcode"></image>
+  </view>
+
+  <view class="optvv">
+    <view class="opttitlec">封面logo:</view>
+    <view class="opttitlev" style=" margin-left: -10rpx;">（建议尺寸200X200）</view>
+    <view class="optinfov" wx:if="{{cover==''}}" bindtap="choosecover">
+      <image src="/resources/add.png" class="addicon"></image>
+    </view>
+    <image src="{{cover}}" mode="aspectFit" class="optinfov" wx:else bindtap="choosecover"></image>
+  </view>
+
+  <view class="optv">
+    <view class="opttitle">备注：</view>
+    <view class="optinfo">
+      <textarea placeholder="（选填）输入内容" placeholder-class="moretip" class="moretxt" value="{{mark}}" bindinput="getmark"></textarea>
+    </view>
+  </view>
+  <view class="publishvv"> </view>
+  <view class="publishv" bindtap="publishopt">
+    <view class="publishbtn">开始发布</view>
+  </view>
+</block>
+
+<!--动态部分-->
+<block wx:if="{{chktab==2}}">
+
+  <view class="rijiv">
+    <textarea placeholder="发布您想要发布的内容......" placeholder-class="rijitip" class="rijit" value="{{riji}}" bindinput="getriji"></textarea>
+  </view>
+
+  <view class="rjimgv">
+    <block wx:for="{{imgs}}" wx:key="item" wx:for-index="x">
+      <view class="upimgoptv">
+        <image src="{{item}}" class="img" mode="aspectFit"></image>
+        <view class="closev" bindtap="delteimgopt" data-index="{{x}}">
+          <image src="/resources/delete.png" class="delicon"></image>
+        </view>
+      </view>
+    </block>
+    <view class="upimgopt" bindtap="upimgopt" wx:if="{{imgs.length<9}}">
+      <image src="/resources/upload.png" class="upicon"></image>
+    </view>
+
+  </view>
+
+  <view class="dwv" bindtap="getdiweiopt">
+    <image src="/resources/map.png" class="dwmap"></image>
+    <view class="dwt">{{didian==''?'你在哪儿？':didian}}</view>
+  </view>
+  <view class="publishvv"> </view>
+  <view class="publishv" bindtap="fabuopt">
+    <view class="publishbtn">立即发布</view>
+  </view>
+</block>

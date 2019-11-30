@@ -1,8 +1,8 @@
 {
   "pages": [
+    "pages/home/index",
     "pages/fabu/index",
     "pages/my/index",
-    "pages/home/index",
     "pages/list/index",
     "pages/comment/index",
     "pages/search/index",

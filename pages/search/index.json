@@ -1,5 +1,8 @@
 {
+  "enablePullDownRefresh": true,
   "usingComponents": {
-    "searchcom": "../../components/search/index"
+    "searchcom": "../../components/search/index",
+    "dynamiccom": "../../components/dynamic/index",
+    "diarycom": "../../components/diary/index"
   }
 }
