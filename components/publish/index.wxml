@@ -1,0 +1,22 @@
+<!--components/publish/index.wxml-->
+<view class="actobjv" bindtap="godetail">
+  <image src="{{dataobj.cover}}" class="txicon"></image>
+  <view class="actinfov">
+    <view class="acttitle">{{dataobj.title}}</view>
+    <view class="actdate">{{dataobj.date}}</view>
+    <view class="actoptv">
+      <view class="acticonv">
+        <image src="/resources/zan.png" class="acticon"></image>
+        <view class="acticonnum">{{dataobj.zannum}}</view>
+      </view>
+      <view class="acticonv">
+        <image src="/resources/share.png" class="acticon"></image>
+        <view class="acticonnum">{{dataobj.sharenum}}</view>
+      </view>
+      <view class="acticonv"> 
+        <image src="/resources/msgh.png" class="acticon"></image>
+        <view class="acticonnum">{{dataobj.msgnum}}</view>
+      </view>
+    </view>
+  </view>
+</view>

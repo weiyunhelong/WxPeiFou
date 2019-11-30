@@ -1,2 +1,11 @@
 <!--pages/about/index.wxml-->
-<text>pages/about/index.wxml</text>
+
+<view class="logov">
+  <image src="/resources/logo.png" class="logo"></image>
+</view>
+<view class="wxappname">『陪否』</view>
+<view class="slogan">『陪否』—— 即刻找到你正想要的陪伴</view>
+
+<view class="line"></view>
+
+<view class="introduce">公司介绍</view>

@@ -1,3 +1,4 @@
+<!--components/comments/index.wxml-->
 <view class="pinglunv">
   <view class="userv">
     <view class="leftv">

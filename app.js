@@ -66,8 +66,18 @@ App({
     // 登录,获取openid
     that.GetWxOpenId();
   },  
-  onHide: function (options){
-    console.log("AAAA");
+  GetSystemInfo(){
+    var that=this;
+
+    wx.getSystemInfo({
+      success: function (res) {
+        let headerH = wx.getMenuButtonBoundingClientRect()
+      
+        that.globalData.statusBarHeight = res.statusBarHeight //状态栏高度
+        that.globalData.titleBarHeight = (headerH.bottom + headerH.top) - (res.statusBarHeight * 2)
+        
+      }
+    })
   },
   globalData: {
     hasUserInfo:false,//用户信息是否完整
@@ -77,7 +87,8 @@ App({
     openId: "", //OPENID
     Token: "", //session_key
     unionid: '', //unionid
-    statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],//自定义顶部状态栏使用
+    statusBarHeight:20,//自定义顶部状态栏使用
+    titleBarHeight: 40,//自定义顶部状态栏高度
     userDesc:'',//个人简介
   }
 })

@@ -5,7 +5,12 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    statusBarHeight: getApp().globalData.statusBarHeight,//自定义顶部状态栏使用
+    titleBarHeight: getApp().globalData.titleBarHeight,//自定义顶部状态栏高度
+    comments:[1,2,3,4],
+    pageindex:1,
+    pagesize:10,
+    imgh:0
   },
 
   /**
@@ -14,7 +19,13 @@ Page({
   onLoad: function (options) {
 
   },
+  getcoverh(e){//获取图片高度
+    var that=this;
 
+    that.setData({
+      imgh: e.detail.height
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

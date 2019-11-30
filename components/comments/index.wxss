@@ -1,3 +1,4 @@
+/* components/comments/index.wxss */
 .pinglunv {
   margin: 20rpx 25rpx 0 25rpx;
   padding-bottom: 16rpx;
