@@ -22,7 +22,6 @@ Component({
    */
   data: {
     btntype: 1,
-    hasUserInfo: getApp().globalData.hasUserInfo,
   },
 
   /**
@@ -31,7 +30,7 @@ Component({
   methods: {
     gosearch() { //点击显示更多
       var that = this;
-      if (!that.data.hasUserInfo) {
+      if (!getApp().globalData.hasUserInfo) {
         wx.navigateTo({
           url: '../wxlogin/auth',
         })

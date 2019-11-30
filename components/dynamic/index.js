@@ -20,6 +20,7 @@ Component({
           date: newVal.date,
           starttime: newVal.starttime,
           endtime: newVal.endtime,
+          hasUserInfo: getApp().globalData.hasUserInfo,
         })
       }
     },
@@ -29,7 +30,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    hasUserInfo: getApp().globalData.hasUserInfo,
+    hasUserInfo: false,
     id: 0,
     avatarUrl: '',
     title: '',

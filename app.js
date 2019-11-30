@@ -78,5 +78,6 @@ App({
     Token: "", //session_key
     unionid: '', //unionid
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],//自定义顶部状态栏使用
+    userDesc:'',//个人简介
   }
 })

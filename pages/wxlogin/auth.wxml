@@ -5,9 +5,9 @@
 </view>
 
 
-<button open-type='getUserInfo' lang="zh_CN" bindgetuserinfo="onGotUserInfo" class='btnv' style="margin-top:65rpx;">授权登录</button>
+<button open-type='getUserInfo' lang="zh_CN" bindgetuserinfo="onGotUserInfo" class='btnv' style="margin-top:65rpx;">{{nickName}}</button>
 
-<button open-type='getPhoneNumber' lang="zh_CN" bindgetphonenumber="getphonenumber" class='btnv' style="margin-top:25rpx;">手机号码</button>
+<button open-type='getPhoneNumber' lang="zh_CN" bindgetphonenumber="getphonenumber" class='btnv' style="margin-top:25rpx;">{{phone}}</button>
 
 <textarea class="introduce" placeholder="个人简介" bindinput="getintroduce" value="{{introduce}}"></textarea>
 

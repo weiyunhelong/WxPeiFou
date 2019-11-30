@@ -11,7 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    chktab: 2, //选中的Tab
+    chktab: 1, //选中的Tab
     /*陪伴部分*/
     title: '', //标题
     desc: '', //详情

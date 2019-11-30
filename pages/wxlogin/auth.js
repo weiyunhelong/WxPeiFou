@@ -10,8 +10,8 @@ Page({
    */
   data: {
     avatarUrl: '', //头像
-    nickName: '', //昵称
-    phone: '', //手机号码
+    nickName: '授权登录', //昵称
+    phone: '手机号码', //手机号码
     introduce: '', //个人简介
   },
 
@@ -72,6 +72,8 @@ Page({
     } else {
       //TODO 提交数据，返回前一个页面
       getApp().globalData.hasUserInfo=true;
+      getApp().globalData.userDesc = introduce;
+      
       wx.navigateBack({
         delta: 1
       })

@@ -1,2 +1,24 @@
 <!--pages/search/index.wxml-->
+<!--搜索部分-->
 <searchcom receiveData="{{searchparams}}" bindsearchopt="searchopt"/>
+
+<!--寻找/提供-->
+<block wx:for="{{datas}}" wx:key="item">
+  <dynamiccom receiveData="{{item}}" />
+</block>
+
+
+<!--日记部分-->
+<view class="diaryv">
+  <view class="leftv">
+    <block wx:for="{{diarys}}" wx:key="item" wx:for-index="x">
+      <diarycom receiveData="{{item}}" wx:if="{{x%2==0}}" />
+    </block>
+  </view>
+
+  <view class="rightv">
+    <block wx:for="{{diarys}}" wx:key="item" wx:for-index="x">
+      <diarycom receiveData="{{item}}" wx:if="{{x%2!=0}}" />
+    </block>
+  </view>
+</view>

@@ -6,7 +6,8 @@ Page({
    */
   data: {
     userInfo: {},
-    hasUserInfo: getApp().globalData.hasUserInfo,
+    hasUserInfo: false,
+    introduce:''
   },
 
   /**
@@ -61,7 +62,13 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    var that=this;
 
+    that.setData({
+      hasUserInfo: getApp().globalData.hasUserInfo,
+      userInfo: getApp().globalData.userInfo,
+      introduce: getApp().globalData.introduce,
+    })
   },
 
   /**
