@@ -54,7 +54,7 @@ Component({
         })
       } else {
         wx.navigateTo({
-          url: '../../pages/dongtai/index?id=' + that.data.id,
+          url: '../../pages/dongtai/index?id=' + that.data.id + '&money=' + that.data.price
         })
       }
     },

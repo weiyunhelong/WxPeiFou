@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/dongtai/index",
     "pages/home/index",
     "pages/fabu/index",
     "pages/my/index",
@@ -8,6 +7,7 @@
     "pages/comment/index",
     "pages/search/index",
     "pages/dongtai/list",
+    "pages/dongtai/index",
     "pages/user/index",
     "pages/about/index",
     "pages/pingjia/index",

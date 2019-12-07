@@ -50,7 +50,7 @@ Component({
         })
       } else {
         wx.navigateTo({
-          url: '../../pages/riji/index?id=0',
+          url: '../../pages/riji/index?id='+that.data.id,
         })
       }
     },

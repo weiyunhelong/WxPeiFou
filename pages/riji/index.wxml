@@ -1,2 +1,46 @@
-<!--pages/riji/index.wxml-->
-<text>pages/riji/index.wxml</text>
+<!--pages/dongtai/index.wxml-->
+<!--顶部信息行-->
+<view class="topv" style="padding-top:{{statusBarHeight}}px;height:{{titleBarHeight}}px;line-height:{{titleBarHeight}}px;">
+  <view class="backoptv" bindtap="backpreopt" style="margin-top:calc({{titleBarHeight/2 - 8}}px);">
+    <image src="/resources/backicon.png" class="backimg"></image>
+  </view>
+  <image src="/resources/tx.jpeg" class="tximg" style="margin-top:calc({{titleBarHeight/2-15}}px);"></image>
+  <view class="nickName">小美</view>
+</view>
+
+<!--动态信息-->
+<view class="dynamicv">
+  <image src="/resources/riji.jpg" class="cover" mode="widthFix" style="height:{{imgh}}px;" bindload="getcoverh"></image>
+  <view class="infoc">
+    <view class="infotitle">篮球攻略</view>
+    <view class="infodate">2019.11.19</view>
+  </view>
+  <view class="introduce">动态内容详解介绍......</view>
+</view>
+
+
+<!--评论部分-->
+<block wx:for="{{comments}}" wx:key="item">
+  <commentscom receiveData="{{item}}" />
+</block>
+
+<!--底部分享-->
+<view class="bottomvv"></view>
+<view class="bottomv">
+  <view class="inputv">
+    <image src="/resources/edit.png" class="editicon" wx:if="{{!isfocus&&comment==''}}"></image>
+    <input type="text" class="commentt" placeholder="说点什么......" placeholder-class="commentip" value="{{comment}}" confirm-type="send" bindconfirm="postcommentopt"  bindinput="getcomment" bindfocus="focusopt" bindblur="bluropt"></input>
+  </view>
+  <button open-type="share" class="optnumv">
+    <image src="/resources/share.png" class="opticon"></image>
+    <view class="numv">100</view>
+  </button>
+  <view class="optnumv">
+    <image src="/resources/zan.png" class="opticon"></image>
+    <view class="numv">100</view>
+  </view>
+  <view class="optnumv">
+    <image src="/resources/msg.png" class="opticon"></image>
+    <view class="numv">100</view>
+  </view>
+</view>

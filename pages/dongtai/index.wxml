@@ -1,43 +1,93 @@
 <!--pages/dongtai/index.wxml-->
-<!--顶部信息行-->
-<view class="topv" style="padding-top:{{statusBarHeight}}px;height:{{titleBarHeight}}px;line-height:{{titleBarHeight}}px;">
-  <image src="/resources/tx.jpeg" class="tximg" style="margin-top:calc({{titleBarHeight/2-15}}px);"></image>
-  <view class="nickName">小美</view>
-</view>
+<wxs module="filter" src="./tool.wxs"></wxs>
 
-<!--动态信息-->
-<view class="dynamicv">
-  <image src="/resources/riji.jpg" class="cover" mode="widthFix" style="height:{{imgh}}px;" bindload="getcoverh"></image>
-  <view class="infoc">
-    <view class="infotitle">篮球攻略</view>
-    <view class="infodate">2019.11.19</view>
+<!--顶部的轮播图-->
+<swiper class="swiper-box" indicator-dots="{{indicatorDots}}" circular="true" style="height:{{imgheight}}rpx;" indicator-color="#fff">
+  <block wx:for="{{imgs}}" wx:key="item" wx:for-index="x">
+    <swiper-item class="swiper-item">
+      <image class="slide-image" wx:if='{{x==0}}' data-index='{{x}}' bindload="imageLoad" class="slide-image" src="{{item}}" lazy-load='true' mode="aspectFit" style='height:{{imgheight}}rpx;'></image>
+      <image class="slide-image" src="{{item}}" lazy-load='true' style='height:{{imgheight}}rpx;' mode="aspectFit" wx:else></image>
+    </swiper-item>
+  </block>
+</swiper>
+
+<!--用户信息-->
+<view class="userinfov" bindtap="gouserdetail">
+  <image src="{{userAvatarUrl}}" class="tximg"></image>
+  <view class="userinfo">
+    <view class="nickname">{{userNickName}}</view>
+    <view class="desc">{{userDesc}}</view>
   </view>
-  <view class="introduce">动态内容详解介绍......</view>
 </view>
 
+<!--活动标题-->
+<view class="titlev">{{title}}</view>
 
-<!--评论部分-->
-<block wx:for="{{comments}}" wx:key="item">
-  <commentscom receiveData="{{item}}" />
-</block>
+<!--活动时间-->
+<view class="infov">
+  <view class="infotitle">日期时间</view>
+  <view class="infot">{{date}} {{startdt}}~{{enddt}}</view>
+</view>
 
-<!--底部分享-->
+<!--活动详情-->
+<view class="infov" style="height:200rpx;">
+  <view class="infotitle">详情</view>
+  <view class="infot">此处展示详情内容 （如果用户没有填写此处空）</view>
+</view>
+
+<!--活动地址-->
+<view class="infov" style="height:350rpx;">
+  <view class="infotitle">地址</view>
+  <map id="map" longitude="{{lng}}" latitude="{{lat}}" scale="12" markers="{{markers}}" bindmarkertap="markertap" show-location="{{true}}" style="width: 100%; height: 240rpx;"></map>
+</view>
+
+<!--活动人数-->
+<view class="infov">
+  <view class="infotitle">人数</view>
+  <view class="infot">{{numbers}}人</view>
+</view>
+
+<!--活动价格-->
+<view class="infov">
+  <view class="infotitle">价格</view>
+  <view class="infot" wx:if="{{money==0}}">免费</view>
+  <view class="infot" wx:else>¥{{money}}元</view>
+</view>
+
+<!--活动价格-->
+<view class="infov">
+  <view class="infotitle">联系方式</view>
+  <view class="infot">手机：{{filter.phoneformat(phone)}}</view>
+  <view class="infot">微信：{{wechat}}</view>
+  <view class="infot">微信二维码：</view>
+  <image src="/resources/wxuser.png" class="wxuser"></image>
+</view>
+
+<!--活动备注-->
+<view class="infov">
+  <view class="infotitle">备注</view>
+  <view class="infot">备注备注备注备注备注备注备注备注备注备注备注备注备注备注 备注备注备注备注备注备注备注备注备注备注备注备注备.......
+  </view>
+</view>
+
+<!--用户评价-->
+<view class="showcomments">用户评价</view>
+
+<!--底部操作按钮-->
 <view class="bottomvv"></view>
 <view class="bottomv">
-  <view class="inputv">
-    <image src="/resources/edit.png" class="editicon"></image>
-    <input type="text" class="commentt" placeholder="说点什么......" placeholder-class="commentip" value="{{comment}}"  bindinput="getcomment"></input>
-  </view>
-  <view class="optnumv">
+  <button open-type="share" class="optv">
     <image src="/resources/share.png" class="opticon"></image>
-    <view class="numv">100</view>
+    <view class="opttxt">分享</view>
+  </button>
+  <view class="linev"></view>
+  <view class="optv" bindtap="makecallopt">
+    <image src="/resources/tel.png" class="opticon"></image>
+    <view class="opttxt">联系</view>
   </view>
-  <view class="optnumv">
-    <image src="/resources/zan.png" class="opticon"></image>
-    <view class="numv">100</view>
-  </view>
-  <view class="optnumv">
-    <image src="/resources/msg.png" class="opticon"></image>
-    <view class="numv">100</view>
+  <view class="linev" wx:if="{{money!=0}}"></view>
+  <view class="optv"  wx:if="{{money!=0}}" bindtap="payforopt">
+    <image src="/resources/money.png" class="opticon"></image>
+    <view class="opttxt">支付</view>
   </view>
 </view>

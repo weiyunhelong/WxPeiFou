@@ -1,11 +1,19 @@
-// pages/riji/index.js
+// pages/dongtai/index.js
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    id: 0,//动态id
+    statusBarHeight: getApp().globalData.statusBarHeight,//自定义顶部状态栏使用
+    titleBarHeight: getApp().globalData.titleBarHeight,//自定义顶部状态栏高度
+    comments:[1,2,3,4],
+    pageindex:1,
+    pagesize:10,
+    imgh:0,
+    isfocus:false,//是否聚焦评论
+    comment:''
   },
 
   /**
@@ -14,7 +22,52 @@ Page({
   onLoad: function (options) {
 
   },
+  getcoverh(e){//获取图片高度
+    var that=this;
 
+    that.setData({
+      imgh: e.detail.height
+    })
+  },
+  backpreopt(){//返回上个页面
+    wx.navigateBack({
+      delta: 1,
+    })
+  },
+  focusopt(e){//是否聚焦
+    var that=this;
+    that.setData({
+      isfocus: true
+    })
+  },
+  bluropt(){//离开
+    var that = this;
+    that.setData({
+      isfocus: false
+    })
+  },
+  getcomment(e){//获取输入内容
+    var that = this;
+    that.setData({
+      comment: e.detail.value
+    })
+  },
+  postcommentopt(){//点击发送按钮
+    var that=this;
+
+    var params={
+      dynamicid:that.data.id,
+      userid:getApp().globalData.userid,
+      comment: that.data.comment
+    };
+
+    //TODO 发送成功
+    that.setData({
+      isfocus: false,
+      comment:''
+    })
+  }
+  ,
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
