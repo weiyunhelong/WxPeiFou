@@ -50,38 +50,6 @@ function ConsoleLog(obj) {
   console.log(obj);
 }
 
-//打标签，请求方式
-function AddTag(category, action, lable, value) {
-  var promise = new Promise((resolve, reject) => {
-
-    var that = this;
-    //请求接口，进行打标签
-    wx.request({
-      url: getApp().globalData.Viewrequesturl + getApp().globalData.store_id + '/' + getApp().globalData.scrm_id,
-      data: {
-        openid: getApp().globalData.openId,
-        unionid: getApp().globalData.unionid,
-        category: category,
-        action: action,
-        lable: lable,
-        value: value
-      },
-      header: {
-        "Content-Type": "application/x-www-form-urlencoded"
-      },
-      method: 'GET',
-      success: function(res) {
-        ConsoleLog("打标签接口");
-        ConsoleLog(res);
-        resolve(res);
-      },
-      fail: function(res) {
-        reject('网络超时出错A');
-      }
-    })
-  });
-  return promise;
-}
 
 //显示提示 type 1:成功的提示，2：失败的提示，其他的是替换图片
 function ShowAlert(type, msg, image) {
@@ -102,11 +70,46 @@ function ShowAlert(type, msg, image) {
   }
 }
 
+//腾讯检验文字的安全
+var MsgSecCheck = function (txt) {
+  var that = this;
+  var url = getApp().globaldata.requesturl + "/api/PublicInfor/GetmsgSecCheck";
+  var params = {
+    contentinfor: txt
+  };
+
+  wx.request({
+    url: url,
+    method: 'GET',
+    data: params,
+    success: function (res) {
+      console.log("文字内容安全")
+    }
+  })
+}
+
+//腾讯检验图片的安全
+var ImgSecCheck = function (filepath) {
+  var that = this;
+  var url = getApp().globaldata.requesturl + "/PublicInfor/GetImgSecCheck";
+  var params = {
+    imgurl: filepath
+  };
+
+  wx.request({
+    url: url,
+    method: 'GET',
+    data: params,
+    success: function (res) {
+      console.log("文字内容安全")
+    }
+  })
+}
+
 //对外暴露的方法
 module.exports = {
   GetRequest: GetRequest, //Get请求的方式
   PostRequest: PostRequest, //POST请求的方式
   ConsoleLog: ConsoleLog, //打log的方式
-  AddTag: AddTag, //打标签
   ShowAlert: ShowAlert, //弹窗显示提示
 }

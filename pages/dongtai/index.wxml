@@ -60,7 +60,7 @@
   <view class="infot">手机：{{filter.phoneformat(phone)}}</view>
   <view class="infot">微信：{{wechat}}</view>
   <view class="infot">微信二维码：</view>
-  <image src="/resources/wxuser.png" class="wxuser"></image>
+  <image src="/resources/wxuser.png" class="wxuser" bindtap="previewimg"></image>
 </view>
 
 <!--活动备注-->
@@ -71,7 +71,7 @@
 </view>
 
 <!--用户评价-->
-<view class="showcomments">用户评价</view>
+<view class="showcomments" bindtap="gocommentopt">用户评价</view>
 
 <!--底部操作按钮-->
 <view class="bottomvv"></view>

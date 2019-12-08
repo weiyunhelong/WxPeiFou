@@ -27,7 +27,7 @@ Page({
       wx.navigateTo({
         url: '../wxlogin/auth',
       })
-    } else {
+    } else{
       wx.navigateTo({
         url: '../list/index?type=' + e.currentTarget.dataset.type,
       })

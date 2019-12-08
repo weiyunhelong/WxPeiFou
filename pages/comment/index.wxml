@@ -1,2 +1,5 @@
 <!--pages/comment/index.wxml-->
-<text>pages/comment/index.wxml</text>
+<!--评论部分-->
+<block wx:for="{{comments}}" wx:key="item">
+  <commentscom receiveData="{{item}}" />
+</block>

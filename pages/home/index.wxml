@@ -21,6 +21,7 @@
 <morebtncom receiveData="{{2}}"/>
 
 <!--日记部分-->
+<view class="category">最新动态</view>
 <view class="diaryv">
   <view class="leftv">
     <block wx:for="{{diarys}}" wx:key="item" wx:for-index="x">

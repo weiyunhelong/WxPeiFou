@@ -20,6 +20,7 @@ Component({
           date: newVal.date,
           starttime: newVal.starttime,
           endtime: newVal.endtime,
+          type: newVal.type,
           hasUserInfo: getApp().globalData.hasUserInfo,
         })
       }

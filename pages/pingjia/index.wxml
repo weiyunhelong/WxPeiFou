@@ -1,2 +1,29 @@
 <!--pages/pingjia/index.wxml-->
-<text>pages/pingjia/index.wxml</text>
+<view class="rijiv">
+  <textarea placeholder="留下您的评价" placeholder-class="rijitip" class="rijit" value="{{comment}}" bindinput="getcomment"></textarea>
+</view>
+
+<view class="rjimgv">
+  <block wx:for="{{imgs}}" wx:key="item" wx:for-index="x">
+    <view class="upimgoptv">
+      <image src="{{item}}" class="img" mode="aspectFit"></image>
+      <view class="closev" bindtap="delteimgopt" data-index="{{x}}">
+        <image src="/resources/delete.png" class="delicon"></image>
+      </view>
+    </view>
+  </block>
+  <view class="upimgopt" bindtap="upimgopt" wx:if="{{imgs.length<9}}">
+    <image src="/resources/upload.png" class="upicon"></image>
+  </view>
+
+</view>
+
+<view class="dwv" bindtap="getdiweiopt">
+  <image src="/resources/map.png" class="dwmap"></image>
+  <view class="dwt">{{didian==''?'你在哪儿？':didian}}</view>
+</view>
+
+<view class="publishvv"> </view>
+<view class="publishv" bindtap="fabuopt">
+  <view class="publishbtn">评价</view>
+</view>

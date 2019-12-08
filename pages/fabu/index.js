@@ -338,14 +338,6 @@ Page({
       ddlng: 0, //日记地点经纬度
     })
   },
-  ImgSecCheck(filepath) { //检查图片是否安全
-    //TODO 
-    //https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/sec-check/security.imgSecCheck.html
-  },
-  MsgSecCheck(txt) { //检查文本是否安全
-    //TODO 
-    //   https://developers.weixin.qq.com/miniprogram/dev/api-backend/open-api/sec-check/security.msgSecCheck.html
-  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

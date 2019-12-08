@@ -26,7 +26,7 @@
   width: 375rpx;
   background: #fff;
   color: #000;
-  height: 149rpx;
+  height: 148rpx;
 }
 
 /*录入信息部分*/

@@ -82,6 +82,7 @@ Page({
         date: '2019.11.19',
         starttime: '14:00',
         endtime: '15:00',
+        type: 1
       },
       {
         id: 2,
@@ -93,6 +94,7 @@ Page({
         date: '2019.11.19',
         starttime: '14:00',
         endtime: '15:00',
+        type: 1
       }, {
         id: 3,
         avatarUrl: '/resources/tx.jpeg',
@@ -103,6 +105,7 @@ Page({
         date: '2019.11.19',
         starttime: '14:00',
         endtime: '15:00',
+        type: 1
       },
       {
         id: 4,
@@ -114,6 +117,7 @@ Page({
         date: '2019.11.19',
         starttime: '14:00',
         endtime: '15:00',
+        type: 1
       }, {
         id: 5,
         avatarUrl: '/resources/tx.jpeg',
@@ -124,6 +128,7 @@ Page({
         date: '2019.11.19',
         starttime: '14:00',
         endtime: '15:00',
+        type: 1
       },
     ];
 
@@ -132,60 +137,65 @@ Page({
     })
   },
   GetProvides() { //获取提供陪伴
-  var that=this;
+    var that = this;
     var provides = [{
-      id: 1,
-      avatarUrl: '/resources/tx.jpeg',
-      title: '我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想',
-      price: 0,
-      address: '万科小区',
-      distance: '100m',
-      date: '2019.11.19',
-      starttime: '14:00',
-      endtime: '15:00',
-    },
-    {
-      id: 2,
-      avatarUrl: '/resources/tx.jpeg',
-      title: '我想找人打篮球',
-      price: 50,
-      address: '绿地小区',
-      distance: '100m',
-      date: '2019.11.19',
-      starttime: '14:00',
-      endtime: '15:00',
-    }, {
-      id: 3,
-      avatarUrl: '/resources/tx.jpeg',
-      title: '我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想',
-      price: 0,
-      address: '万科小区',
-      distance: '100m',
-      date: '2019.11.19',
-      starttime: '14:00',
-      endtime: '15:00',
-    },
-    {
-      id: 4,
-      avatarUrl: '/resources/tx.jpeg',
-      title: '我想找人打篮球',
-      price: 50,
-      address: '绿地小区',
-      distance: '100m',
-      date: '2019.11.19',
-      starttime: '14:00',
-      endtime: '15:00',
-    }, {
-      id: 5,
-      avatarUrl: '/resources/tx.jpeg',
-      title: '我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想',
-      price: 0,
-      address: '万科小区',
-      distance: '100m',
-      date: '2019.11.19',
-      starttime: '14:00',
-      endtime: '15:00',
-    },
+        id: 1,
+        avatarUrl: '/resources/tx.jpeg',
+        title: '我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想',
+        price: 0,
+        address: '万科小区',
+        distance: '100m',
+        date: '2019.11.19',
+        starttime: '14:00',
+        endtime: '15:00',
+        type: 2
+      },
+      {
+        id: 2,
+        avatarUrl: '/resources/tx.jpeg',
+        title: '我想找人打篮球',
+        price: 50,
+        address: '绿地小区',
+        distance: '100m',
+        date: '2019.11.19',
+        starttime: '14:00',
+        endtime: '15:00',
+        type: 2
+      }, {
+        id: 3,
+        avatarUrl: '/resources/tx.jpeg',
+        title: '我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想',
+        price: 0,
+        address: '万科小区',
+        distance: '100m',
+        date: '2019.11.19',
+        starttime: '14:00',
+        endtime: '15:00',
+        type: 2
+      },
+      {
+        id: 4,
+        avatarUrl: '/resources/tx.jpeg',
+        title: '我想找人打篮球',
+        price: 50,
+        address: '绿地小区',
+        distance: '100m',
+        date: '2019.11.19',
+        starttime: '14:00',
+        endtime: '15:00',
+        type: 2
+      }, {
+        id: 5,
+        avatarUrl: '/resources/tx.jpeg',
+        title: '我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想',
+        price: 0,
+        address: '万科小区',
+        distance: '100m',
+        date: '2019.11.19',
+        starttime: '14:00',
+        endtime: '15:00',
+        type: 2
+      },
     ];
 
     that.setData({
@@ -193,42 +203,40 @@ Page({
     })
   },
   GetDiarys() { //获取日记
-    var that=this;
-    var diarys=[
-      {
-        id: 1,
-        cover: '/resources/riji.jpg',
-        title: '篮球攻略',
-        date: '2019.11.19',
-        avatarUrl:'/resources/tx.jpeg',
-        nickName: '小美',
-        zannum: 100,
-      }, {
-        id: 2,
-        cover: '/resources/riji.jpg',
-        title: '篮球攻略',
-        date: '2019.11.19',
-        avatarUrl: '/resources/tx.jpeg',
-        nickName: '小美',
-        zannum: 100,
-      }, {
-        id: 3,
-        cover: '/resources/riji.jpg',
-        title: '篮球攻略',
-        date: '2019.11.19',
-        avatarUrl: '/resources/tx.jpeg',
-        nickName: '小美',
-        zannum: 100,
-      }, {
-        id: 4,
-        cover: '/resources/riji.jpg',
-        title: '篮球攻略',
-        date: '2019.11.19',
-        avatarUrl: '/resources/tx.jpeg',
-        nickName: '小美',
-        zannum: 100,
-      },
-    ];
+    var that = this;
+    var diarys = [{
+      id: 1,
+      cover: '/resources/riji.jpg',
+      title: '篮球攻略',
+      date: '2019.11.19',
+      avatarUrl: '/resources/tx.jpeg',
+      nickName: '小美',
+      zannum: 100,
+    }, {
+      id: 2,
+      cover: '/resources/riji.jpg',
+      title: '篮球攻略',
+      date: '2019.11.19',
+      avatarUrl: '/resources/tx.jpeg',
+      nickName: '小美',
+      zannum: 100,
+    }, {
+      id: 3,
+      cover: '/resources/riji.jpg',
+      title: '篮球攻略',
+      date: '2019.11.19',
+      avatarUrl: '/resources/tx.jpeg',
+      nickName: '小美',
+      zannum: 100,
+    }, {
+      id: 4,
+      cover: '/resources/riji.jpg',
+      title: '篮球攻略',
+      date: '2019.11.19',
+      avatarUrl: '/resources/tx.jpeg',
+      nickName: '小美',
+      zannum: 100,
+    }, ];
 
     that.setData({
       diarys: diarys

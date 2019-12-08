@@ -72,6 +72,17 @@ Page({
       url: '../user/index?id=' + that.data.userId,
     })
   },
+  previewimg(){//点击微信二维码
+     wx.previewImage({
+       urls: ['https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575792203952&di=7bcaafee62893e1b2e4e14546b8a35c7&imgtype=0&src=http%3A%2F%2Fimg1.doubanio.com%2Fview%2Fgroup_topic%2Fl%2Fpublic%2Fp69921918.jpg'],
+     })
+  },
+  gocommentopt(){//点击用户评价
+    var that = this;
+    wx.navigateTo({
+      url: '../pingjia/index?id=' + that.data.id,
+    })
+  },
   makecallopt() { //拨打电话
     var that = this;
     wx.makePhoneCall({
