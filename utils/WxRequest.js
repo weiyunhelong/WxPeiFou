@@ -73,9 +73,9 @@ function ShowAlert(type, msg, image) {
 //腾讯检验文字的安全
 var MsgSecCheck = function (txt) {
   var that = this;
-  var url = getApp().globaldata.requesturl + "/api/PublicInfor/GetmsgSecCheck";
+  var url = getApp().globalData.DBrequesturl + "/MsgCheckSafe";
   var params = {
-    contentinfor: txt
+    conent: txt
   };
 
   wx.request({
@@ -91,9 +91,9 @@ var MsgSecCheck = function (txt) {
 //腾讯检验图片的安全
 var ImgSecCheck = function (filepath) {
   var that = this;
-  var url = getApp().globaldata.requesturl + "/PublicInfor/GetImgSecCheck";
+  var url = getApp().globalData.DBrequesturl + "/ImgCheckSafe";
   var params = {
-    imgurl: filepath
+    filepath: filepath
   };
 
   wx.request({
@@ -101,7 +101,7 @@ var ImgSecCheck = function (filepath) {
     method: 'GET',
     data: params,
     success: function (res) {
-      console.log("文字内容安全")
+      console.log("图片内容安全")
     }
   })
 }
@@ -112,4 +112,6 @@ module.exports = {
   PostRequest: PostRequest, //POST请求的方式
   ConsoleLog: ConsoleLog, //打log的方式
   ShowAlert: ShowAlert, //弹窗显示提示
+  MsgSecCheck: MsgSecCheck,//验证文字的安全
+  ImgSecCheck: ImgSecCheck,//验证图片的安全
 }

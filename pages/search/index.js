@@ -33,9 +33,9 @@ Page({
 
   },
   searchopt(e) { //搜索操作
-    console.log("搜索的参数接收:", e);
+
     var that = this;
-    var searchparams={
+    var searchparams = {
       searchkey: e.detail.searchkey,
       date: e.detail.date,
       starttime: e.detail.starttime,
@@ -44,81 +44,14 @@ Page({
       city: e.detail.city,
       searchtype: 1
     };
-    
+
     if (that.data.moretype == 3) { //日记
       that.GetDiaryList();
     } else { //动态
       that.GetDynamicList();
     }
   },
-  GetDynamicList(){//动态列表
-    var that=this;
-
-    //参数部分
-    var searchparams = that.data.searchparams;
-    var pageindex=that.data.pageindex;
-    var pagesize=that.data.pagesize;
-
-    var datas = [{
-      id: 1,
-      avatarUrl: '/resources/tx.jpeg',
-      title: '我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想',
-      price: 0,
-      address: '万科小区',
-      distance: '100m',
-      date: '2019.11.19',
-      starttime: '14:00',
-      endtime: '15:00',
-    },
-    {
-      id: 2,
-      avatarUrl: '/resources/tx.jpeg',
-      title: '我想找人打篮球',
-      price: 50,
-      address: '绿地小区',
-      distance: '100m',
-      date: '2019.11.19',
-      starttime: '14:00',
-      endtime: '15:00',
-    }, {
-      id: 3,
-      avatarUrl: '/resources/tx.jpeg',
-      title: '我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想',
-      price: 0,
-      address: '万科小区',
-      distance: '100m',
-      date: '2019.11.19',
-      starttime: '14:00',
-      endtime: '15:00',
-    },
-    {
-      id: 4,
-      avatarUrl: '/resources/tx.jpeg',
-      title: '我想找人打篮球',
-      price: 50,
-      address: '绿地小区',
-      distance: '100m',
-      date: '2019.11.19',
-      starttime: '14:00',
-      endtime: '15:00',
-    }, {
-      id: 5,
-      avatarUrl: '/resources/tx.jpeg',
-      title: '我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想我想找人打篮球我想找人打篮球我想',
-      price: 0,
-      address: '万科小区',
-      distance: '100m',
-      date: '2019.11.19',
-      starttime: '14:00',
-      endtime: '15:00',
-    },
-    ];
-
-    that.setData({
-      datas: datas
-    })
-  },
-  GetDiaryList() {//日记
+  GetDynamicList() { //动态列表
     var that = this;
 
     //参数部分
@@ -126,46 +59,72 @@ Page({
     var pageindex = that.data.pageindex;
     var pagesize = that.data.pagesize;
 
-    var that = this;
-    var diarys = [
-      {
-        id: 1,
-        cover: '/resources/riji.jpg',
-        title: '篮球攻略',
-        date: '2019.11.19',
-        avatarUrl: '/resources/tx.jpeg',
-        nickName: '小美',
-        zannum: 100,
-      }, {
-        id: 2,
-        cover: '/resources/riji.jpg',
-        title: '篮球攻略',
-        date: '2019.11.19',
-        avatarUrl: '/resources/tx.jpeg',
-        nickName: '小美',
-        zannum: 100,
-      }, {
-        id: 3,
-        cover: '/resources/riji.jpg',
-        title: '篮球攻略',
-        date: '2019.11.19',
-        avatarUrl: '/resources/tx.jpeg',
-        nickName: '小美',
-        zannum: 100,
-      }, {
-        id: 4,
-        cover: '/resources/riji.jpg',
-        title: '篮球攻略',
-        date: '2019.11.19',
-        avatarUrl: '/resources/tx.jpeg',
-        nickName: '小美',
-        zannum: 100,
-      },
-    ];
+    var url = getApp().globalData.DBrequesturl + '/GetDynamicList';
+    var params = {
+      searchkey: searchparams.searchkey,
+      city: searchparams.city,
+      startdt: searchparams.date + " " + searchparams.starttime,
+      enddt: searchparams.date + " " + searchparams.endtime,
+      page: pageindex,
+      rows: pagesize,
+      type: that.data.moretype,
+      lat: getApp().globalData.lat,
+      lng: getApp().globalData.lng,
+    };
+    WxRequest.GetRequest(url, params).then(res => {
 
-    that.setData({
-      diarys: diarys
+      if (that.data.pageindex == 1) {
+        that.setData({
+          datas: res.data
+        })
+      } else {
+        var alldata = that.data.datas;
+        alldata = alldata.concat(res.data);
+        that.setData({
+          datas: alldata
+        })
+      }
+    }).catch(res => {
+      console.error("获取提供陪伴失败", res);
     })
+  },
+  GetDiaryList() { //日记
+    var that = this;
+
+    //参数部分
+    var searchparams = that.data.searchparams;
+    var pageindex = that.data.pageindex;
+    var pagesize = that.data.pagesize;
+
+    //TODO 获取数据
+    var url = getApp().globalData.DBrequesturl + '/GetDiaryList';
+    var params = {
+      searchkey: searchparams.searchkey,
+      city: searchparams.city,
+      startdt: searchparams.date + " " + searchparams.starttime,
+      enddt: searchparams.date + " " + searchparams.endtime,
+      page: pageindex,
+      rows: pagesize,
+      type: 2
+    };
+    WxRequest.GetRequest(url, params).then(res => {
+
+      if (that.data.pageindex == 1) {
+        that.setData({
+          diarys: res.data
+        })
+      } else {
+        var alldata = that.data.diarys;
+        alldata = alldata.concat(res.data);
+        that.setData({
+          diarys: alldata
+        })
+      }
+
+    }).catch(res => {
+      console.error("获取日记失败", res);
+    })
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -204,7 +163,7 @@ Page({
         that.setData({
           searchparams: searchparams
         })
-
+      
         wx.clearStorage();
       },
     })

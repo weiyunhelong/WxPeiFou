@@ -72,7 +72,8 @@ Component({
             that.setData({
               city: res.data.result.addressComponent.city
             })
-
+            getApp().globalData.lat = mapobj.lat;//定位经纬度 
+            getApp().globalData.lng=mapobj.lng;//定位经纬度 
 
           }).catch(res => {
             console.log("获取城市报错:", res);

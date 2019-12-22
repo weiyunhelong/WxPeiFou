@@ -88,8 +88,9 @@ function getNowTime() {
 
 //得到当前的时间 时分秒
 function getNowNextTime() {
-  var date = new Date();
-  var hour = date.getHours()+1;
+  var dt = new Date().getTime() + 1 * 60 * 60 * 1000;   //小时 * 60分钟 * 60秒 * 1000
+  var date = new Date(dt);
+  var hour = date.getHours();
   var minute = date.getMinutes();
   return [hour, minute].map(formatNumber).join(':')
 }

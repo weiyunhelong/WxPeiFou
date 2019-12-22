@@ -4,18 +4,26 @@
   <view class="backoptv" bindtap="backpreopt" style="margin-top:calc({{titleBarHeight/2 - 8}}px);">
     <image src="/resources/backicon.png" class="backimg"></image>
   </view>
-  <image src="/resources/tx.jpeg" class="tximg" style="margin-top:calc({{titleBarHeight/2-15}}px);"></image>
-  <view class="nickName">小美</view>
+  <image src="{{wxuser.AvatarUrl}}" class="tximg" style="margin-top:calc({{titleBarHeight/2-15}}px);"></image>
+  <view class="nickName onehangtxt">{{wxuser.NickName}}</view>
 </view>
 
 <!--动态信息-->
 <view class="dynamicv">
-  <image src="/resources/riji.jpg" class="cover" mode="widthFix" style="height:{{imgh}}px;" bindload="getcoverh"></image>
+  <!--轮播图部分-->
+  <swiper duration="{{duration}}" interval="{{interval}}" autoplay="{{autoplay}}" circular="{{true}}" style="height:{{imgh}}rpx;">
+    <block wx:for="{{swipers}}" wx:key="item" wx:for-index="x">
+      <swiper-item wx:if="{{item!=''}}">
+        <image src="{{MideaUrl}}{{item}}" bindload="{{x==0?'getImgh':''}}" mode="{{x==0?'widthFix':'aspectFit'}}" style="height:{{imgh}}rpx;" class="cover"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+
   <view class="infoc">
-    <view class="infotitle">篮球攻略</view>
-    <view class="infodate">2019.11.19</view>
+    <view class="infotitle">{{diaryobj.Title}}</view>
+    <view class="infodate">{{date}}</view>
   </view>
-  <view class="introduce">动态内容详解介绍......</view>
+  <view class="introduce">{{diaryobj.Desc}}</view>
 </view>
 
 
@@ -33,14 +41,14 @@
   </view>
   <button open-type="share" class="optnumv">
     <image src="/resources/share.png" class="opticon"></image>
-    <view class="numv">100</view>
+    <view class="numv">{{diaryobj.ShareNum}}</view>
   </button>
-  <view class="optnumv">
+  <view class="optnumv" bindtap="zanopt">
     <image src="/resources/zan.png" class="opticon"></image>
-    <view class="numv">100</view>
+    <view class="numv">{{diaryobj.ZanNum}}</view>
   </view>
   <view class="optnumv">
     <image src="/resources/msg.png" class="opticon"></image>
-    <view class="numv">100</view>
+    <view class="numv">{{diaryobj.ComNum}}</view>
   </view>
 </view>

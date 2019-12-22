@@ -1,4 +1,7 @@
 // pages/dongtai/index.js
+var WxRequest = require('../../utils/WxRequest.js');
+var Tools = require('../../utils/util.js');
+
 Page({
 
   /**
@@ -10,34 +13,20 @@ Page({
     indicatorDots: true,
     vertical: false,
     autoplay: false,
-    interval: 2000,
-    duration: 500,
+    interval: 3000,
+    duration: 1000,
+
     /*活动信息*/
-    imgs: ['/resources/sucai/1.jpg', '/resources/sucai/2.jpg', '/resources/sucai/3.jpg', '/resources/sucai/4.jpg'],//活动的图
-    userAvatarUrl:'/resources/tx.jpeg',//发布着的头像
-    userNickName: '小美',//发布着的昵称
-    userId: 0,//发布着的ID
-    userDesc: '个人信息',//发布着的简介
-    title: '标题',//活动标题
-    date: '2019年11月14日',//活动日期
-    startdt: '15:00',//活动开始时间
-    enddt: '17:30',//活动结束时间
-    desc:'此处展示详情内容 （如果用户没有填写此处空）',//活动详情
-    /*活动地址*/
-    lng: '121.323',
-    lat: '31.123',
+    imgs: [],//活动的图   
     markers: [{
       id: 1,
-      latitude: '31.123',
-      longitude: '121.323',
+      latitude: '0',
+      longitude: '0',
       iconPath: '/resources/mapicon.png',
       width: 32,
       height: 32
     }],
-    numbers:5,//活动人数
-    money:9999,//活动费用
-    wechat:'5213435',
-    phone: '188187383618',//联系电话
+    dataobj:{},//详情
   },
 
   /**
@@ -73,8 +62,9 @@ Page({
     })
   },
   previewimg(){//点击微信二维码
+     var that=this;
      wx.previewImage({
-       urls: ['https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1575792203952&di=7bcaafee62893e1b2e4e14546b8a35c7&imgtype=0&src=http%3A%2F%2Fimg1.doubanio.com%2Fview%2Fgroup_topic%2Fl%2Fpublic%2Fp69921918.jpg'],
+       urls: [that.data.dataobj.Wxcode],
      })
   },
   gocommentopt(){//点击用户评价
@@ -86,7 +76,7 @@ Page({
   makecallopt() { //拨打电话
     var that = this;
     wx.makePhoneCall({
-      phoneNumber: that.data.phone
+      phoneNumber: that.data.dataobj.Phone
     })
   },
   payforopt(){//发起支付
@@ -105,9 +95,54 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    var that = this;
+
+    if (getApp().globalData.openId == '') {
+      getApp().GetWxOpenId().then(res => {
+        that.GetDynamicInfo();
+
+        that.GetComments();
+      })
+    } else {
+      that.GetDynamicInfo();
+
+      that.GetComments();
+    }
+  },
+  GetDynamicInfo(){//获取动态详情
+    var that = this;
+
+    //TODO 获取动态的详情
+    var url = getApp().globalData.DBrequesturl + "/GetDynamicDetail";
+    var params = {
+      id: that.data.id
+    };
+
+    WxRequest.GetRequest(url, params).then(res => {
+      var markers= [{
+        id: 1,
+        latitude: res.data.Dynamic.lat,
+        longitude: res.data.Dynamic.lng,
+        iconPath: '/resources/mapicon.png',
+        width: 32,
+        height: 32
+      }];
+      that.setData({
+        imgs: [res.data.Dynamic.Cover],
+        dataobj: res.data.Dynamic, //陪伴详情
+        wxuser: res.data.WxUser, //作者详情
+        date: res.data.Date, //日期
+        startdt: res.data.StartDt, //开始时间
+        enddt: res.data.EndDt, //开始时间
+        markers:markers
+      })
+    }).catch(res => {
+      console.error("获取详情失败!", res);
+    })
+  },
+  GetComments() {//获取动态评论列表
 
   },
-
   /**
    * 生命周期函数--监听页面隐藏
    */
@@ -140,6 +175,18 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function() {
-
+    var that = this;
+    //TODO 发送成功
+    var url = getApp().globalData.DBrequesturl + "/DynamicShare";
+    var params = {
+      id: that.data.id,
+      openid: getApp().globalData.openId,
+      type:that.data.dataobj.Type
+    };
+    WxRequest.GetRequest(url, params).then(res => {
+      console.error("分享成功", res);
+    }).catch(res => {
+      console.error("分享失败", res);
+    })
   }
 })

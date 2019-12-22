@@ -7,20 +7,12 @@ Component({
     receiveData: {
       type: null,
       observer: function(newVal, oldVal) {
-
+        console.log("陪伴参数", newVal);
         var that = this;
         //赋值
         that.setData({
-          id: newVal.id,
-          avatarUrl: newVal.avatarUrl,
-          title: newVal.title,
-          price: newVal.price,
-          address: newVal.address,
-          distance: newVal.distance,
-          date: newVal.date,
-          starttime: newVal.starttime,
-          endtime: newVal.endtime,
-          type: newVal.type,
+          id: newVal.dynamic.ID,
+          dataobj:newVal,
           hasUserInfo: getApp().globalData.hasUserInfo,
         })
       }
@@ -33,14 +25,7 @@ Component({
   data: {
     hasUserInfo: false,
     id: 0,
-    avatarUrl: '',
-    title: '',
-    price: 0,
-    address: '',
-    distance: '',
-    date: '',
-    starttime: '',
-    endtime: '',
+    dataobj:{}
   },
 
   /**
@@ -55,7 +40,7 @@ Component({
         })
       } else {
         wx.navigateTo({
-          url: '../../pages/dongtai/index?id=' + that.data.id + '&money=' + that.data.price
+          url: '../../pages/dongtai/index?id=' + that.data.id + '&money=' + that.data.dataobj.dynamic.Money
         })
       }
     },

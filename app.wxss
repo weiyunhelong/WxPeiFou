@@ -20,3 +20,9 @@
 
 /*引入字体库图标*/
 @import "styles/fontsome.wxss";
+
+.onehangtxt{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

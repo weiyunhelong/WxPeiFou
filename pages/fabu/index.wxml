@@ -57,7 +57,7 @@
     <view class="opttitle">地点：</view>
     <view class="optinfo" bindtap="golocation">
       <image src="/resources/map.png" class="mapicon"></image>
-      <input type="text" disabled="{{true}}" class="txt" value="{{address}}" style="width:80%;"></input>
+      <input type="text" disabled="{{true}}" class="txt" value="{{address}}" style="width:80%;" placeholder="详细地址"></input>
     </view>
   </view>
 
@@ -103,9 +103,16 @@
     </view>
   </view>
 
+  <view class="optv">
+    <view class="opttitle">微信号：</view>
+    <view class="optinfo">
+      <input type="number" placeholder="（必填）提示：微信号不是微信昵称" placeholder-class="tip" class="txt" value="{{wechat}}" bindinput="getwechat"></input>
+    </view>
+  </view>
+
   <view class="optvv">
     <view class="opttitlec">微信二维码：</view>
-    <view class="opttitlev" style=" margin-left: -30rpx;">（建议尺寸200X200）</view>
+    <view class="opttitlev">（建议尺寸200X200）</view>
     <view class="optinfov" wx:if="{{wxcode==''}}" bindtap="choosewxcode">
       <image src="/resources/add.png" class="addicon"></image>
     </view>
@@ -114,7 +121,7 @@
 
   <view class="optvv">
     <view class="opttitlec">封面logo:</view>
-    <view class="opttitlev" style=" margin-left: -10rpx;">（建议尺寸200X200）</view>
+    <view class="opttitlev">（建议尺寸200X200）</view>
     <view class="optinfov" wx:if="{{cover==''}}" bindtap="choosecover">
       <image src="/resources/add.png" class="addicon"></image>
     </view>
@@ -136,6 +143,9 @@
 <!--动态部分-->
 <block wx:if="{{chktab==2}}">
 
+  <view class="optcv">
+   <input type="text" placeholder="动态的主题" placeholder-class="tip" class="txtv" value="{{dtitle}}" bindinput="getdtitle"></input>
+  </view>
   <view class="rijiv">
     <textarea placeholder="发布您想要发布的内容......" placeholder-class="rijitip" class="rijit" value="{{riji}}" bindinput="getriji"></textarea>
   </view>

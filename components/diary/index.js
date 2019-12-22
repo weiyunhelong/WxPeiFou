@@ -11,7 +11,7 @@ Component({
         var that = this;
         //赋值
         that.setData({
-          id: newVal.id,
+          id: newVal.Id,
           cover: newVal.cover,
           title: newVal.title,
           date: newVal.date,

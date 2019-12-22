@@ -217,6 +217,28 @@
 
 /*动态部分*/
 
+.optcv {
+  margin: 0 25rpx;
+  border-bottom: 1rpx solid #eee;
+  height: 100rpx;
+}
+
+.txtv {
+  color: #101010;
+  font-size: 26rpx;
+  line-height: 100rpx;
+  height: 100rpx;
+  width: calc(100% - 12rpx);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tipv{
+   color: #8c8c8c;
+  font-size: 26rpx;
+  line-height: 100rpx;
+  height: 100rpx;
+}
 .rijiv {
   margin: 0rpx 26rpx;
 }

@@ -71,12 +71,15 @@ App({
     userInfo: null, //微信用户信息
     AddressApi: "https://api.map.baidu.com", //根据经纬度获取城市
     DBrequesturl: "http://localhost:6348/api/DataApi", //API接口
+    MideaUrl: "http://localhost:6348", //服务器素材接口
     openId: "", //OPENID
     Token:'',//session_key
     unionid: '', //unionid
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],//自定义顶部状态栏使用
     statusBarHeight: 20, //自定义顶部状态栏使用
     titleBarHeight: 40, //自定义顶部状态栏高度
-    userDesc: '', //个人简介    
+    userDesc: '', //个人简介  
+    lat: 0,//定位经纬度 
+    lng:0,//定位经纬度  
   }
 })

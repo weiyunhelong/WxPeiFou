@@ -13,15 +13,15 @@
 
 <!--用户信息-->
 <view class="userinfov" bindtap="gouserdetail">
-  <image src="{{userAvatarUrl}}" class="tximg"></image>
+  <image src="{{wxuser.AvatarUrl}}" class="tximg"></image>
   <view class="userinfo">
-    <view class="nickname">{{userNickName}}</view>
-    <view class="desc">{{userDesc}}</view>
+    <view class="nickname">{{wxuser.NickName}}</view>
+    <view class="desc">{{wxuser.Introduce}}</view>
   </view>
 </view>
 
 <!--活动标题-->
-<view class="titlev">{{title}}</view>
+<view class="titlev">{{dataobj.Title}}</view>
 
 <!--活动时间-->
 <view class="infov">
@@ -32,19 +32,19 @@
 <!--活动详情-->
 <view class="infov" style="height:200rpx;">
   <view class="infotitle">详情</view>
-  <view class="infot">此处展示详情内容 （如果用户没有填写此处空）</view>
+  <view class="infot">{{dataobj.Desc}}</view>
 </view>
 
 <!--活动地址-->
 <view class="infov" style="height:350rpx;">
   <view class="infotitle">地址</view>
-  <map id="map" longitude="{{lng}}" latitude="{{lat}}" scale="12" markers="{{markers}}" bindmarkertap="markertap" show-location="{{true}}" style="width: 100%; height: 240rpx;"></map>
+  <map id="map" longitude="{{dataobj.lng}}" latitude="{{dataobj.lat}}" scale="12" markers="{{markers}}" bindmarkertap="markertap" show-location="{{true}}" style="width: 100%; height: 240rpx;"></map>
 </view>
 
 <!--活动人数-->
 <view class="infov">
   <view class="infotitle">人数</view>
-  <view class="infot">{{numbers}}人</view>
+  <view class="infot">{{dataobj.Number}}人</view>
 </view>
 
 <!--活动价格-->
@@ -57,17 +57,16 @@
 <!--活动价格-->
 <view class="infov">
   <view class="infotitle">联系方式</view>
-  <view class="infot">手机：{{filter.phoneformat(phone)}}</view>
-  <view class="infot">微信：{{wechat}}</view>
+  <view class="infot">手机：{{filter.phoneformat(dataobj.Phone)}}</view>
+  <view class="infot">微信：{{dataobj.Wechat}}</view>
   <view class="infot">微信二维码：</view>
-  <image src="/resources/wxuser.png" class="wxuser" bindtap="previewimg"></image>
+  <image src="{{dataobj.WxCode}}" class="wxuser" bindtap="previewimg"></image>
 </view>
 
 <!--活动备注-->
 <view class="infov">
   <view class="infotitle">备注</view>
-  <view class="infot">备注备注备注备注备注备注备注备注备注备注备注备注备注备注 备注备注备注备注备注备注备注备注备注备注备注备注备.......
-  </view>
+  <view class="infot">{{dataobj.Mark}}</view>
 </view>
 
 <!--用户评价-->
