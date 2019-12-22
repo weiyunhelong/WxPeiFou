@@ -1,2 +1,57 @@
 <!--pages/my/index.wxml-->
-<text>pages/my/index.wxml</text>
+<!--个人信息-->
+<view class="topv" wx:if="{{hasUserInfo}}">
+  <image src="{{avatarUrl}}" class="tximg"></image>
+  <view class="userinfo">
+    <view class="nickname">{{nickName}}</view>
+    <view class="desc">{{introduce}}</view>
+  </view>
+</view>
+<view class="topv" wx:if="{{!hasUserInfo}}" bindtap="gowxlogin">
+  <image src="/resources/defaulttx.png" class="tximg"></image>
+  <view class="userinfo">
+    <view class="tipt">您还未授权</view>
+    <view class="tip">点击去登录</view>
+  </view>
+</view>
+
+<!--操作行-->
+<view class="optv" bindtap="golist" data-type="1">
+  <view class="optt">我发布的</view>
+  <view class="rightv">
+    <view class="news"></view>
+    <image src="/resources/right.png" class="righticon"></image>
+  </view>
+</view>
+<view class="optv" bindtap="golist" data-type="2">
+  <view class="optt">我参与的</view>
+  <view class="rightv">
+    <view class="news"></view>
+    <image src="/resources/right.png" class="righticon"></image>
+  </view>
+</view>
+<view class="optv" bindtap="gocomment">
+  <view class="optt">我评论的</view>
+  <view class="rightv">
+    <view class="news"></view>
+    <image src="/resources/right.png" class="righticon"></image>
+  </view>
+</view>
+<view class="optv" bindtap="golist" data-type="3">
+  <view class="optt">我的动态</view>
+  <view class="rightv">
+    <view class="news"></view>
+    <image src="/resources/right.png" class="righticon"></image>
+  </view>
+</view>
+<view class="optv" bindtap="goabout">
+  <view class="optt">关于我们</view>
+  <view class="rightv">
+    <view class="news"></view>
+    <image src="/resources/right.png" class="righticon"></image>
+  </view>
+</view>
+<button open-type="feedback" class="optv" style="width:666rpx;">
+  <view class="optt">我要反馈</view>
+  <image src="/resources/right.png" class="righticon"></image>
+</button>

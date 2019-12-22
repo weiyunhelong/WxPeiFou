@@ -60,7 +60,7 @@
 .postion {
   width: 100rpx;
   font-size: 28rpx;
-  height: 89rpx;
+  height: 88rpx;
   line-height: 90rpx;
   color: #ff9800;
   text-align: center;

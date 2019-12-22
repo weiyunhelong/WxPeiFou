@@ -1,0 +1,10 @@
+
+var phoneformat = function (txt) {
+  var pretxt = txt.substring(0,3);
+  var endtxt = txt.substring(7, 10);
+  return pretxt + "*****" + endtxt;
+}
+// 导出对外暴露的属性
+module.exports = {
+  phoneformat: phoneformat
+}

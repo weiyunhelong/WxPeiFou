@@ -1,1 +1,82 @@
 /* pages/my/index.wxss */
+
+.topv {
+  display: flex;
+  margin: 0 22rpx 30rpx 22rpx;
+  border-bottom: 1rpx solid #bbb;
+  padding: 14rpx 0;
+}
+
+.tximg {
+  width: 200rpx;
+  height: 200rpx;
+  margin: 0 52rpx 0 26rpx;
+  border-radius: 100rpx;
+}
+
+.userinfo {
+  width: 450rpx;
+}
+
+.nickname {
+  font-size: 56rpx;
+  color: #ff9800;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.desc {
+  font-size: 32rpx;
+  color: #adaeae;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.tipt {
+  font-size: 24rpx;
+  color: #adaeae;
+  padding-top: 70rpx;
+}
+
+.tip {
+  font-size: 24rpx;
+  color: #adaeae;
+}
+
+/*操作行*/
+
+.optv {
+  display: flex;
+  justify-content: space-between;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin: 0 42rpx;
+  color: #8c8c8c;
+  font-size: 30rpx;
+  background: #fff;
+  padding: 0;
+}
+
+.optv::after {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.rightv {
+  width: 400rpx;
+  display: flex;
+  justify-content: flex-end;
+  color: #ff9800;
+  font-size: 30rpx;
+}
+
+.righticon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-top: 20rpx;
+}

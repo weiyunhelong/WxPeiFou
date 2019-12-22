@@ -1,1 +1,40 @@
 /* pages/about/index.wxss */
+
+.logov {
+  width: 100vw;
+  text-align: center;
+  margin-top: 86rpx;
+}
+
+.logo {
+  width: 120rpx;
+  height: 120rpx;
+}
+
+.wxappname {
+  width: 100vw;
+  text-align: center;
+  font-size: 28rpx;
+  color: #101010;
+  margin: 28rpx 0 56rpx 0;
+}
+
+.slogan{
+   width: 100vw;
+  text-align: center;
+  font-size: 28rpx;
+  color: #101010;
+}
+
+.line{
+  width: 100vw;
+  height: 1rpx;
+  background: #bbbb;
+  margin-top: 110rpx;
+}
+
+.introduce{
+  margin: 36rpx 0 0 132rpx;
+  font-size: 28rpx;
+  color: #646464;
+}

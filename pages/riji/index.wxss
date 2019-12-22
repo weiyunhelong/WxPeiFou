@@ -1,1 +1,123 @@
-/* pages/riji/index.wxss */
+/* pages/dongtai/index.wxss */
+
+.topv {
+  width: 100vw;
+  display: flex;
+}
+
+.tximg {
+  width: 30px;
+  height: 30px;
+  margin-left: 26rpx;
+  margin-right: 20rpx;
+  border-radius: 50%;
+  display: block;
+}
+
+.nickName {
+  font-size: 28rpx;
+  color: #646464;
+}
+
+.cover {
+  width: 100vw;
+  display: block;
+}
+
+.infoc {
+  display: flex;
+  margin: 26rpx 25rpx 0;
+}
+
+.infotitle {
+  font-size: 32rpx;
+  color: #101010;
+  margin-right: 24rpx;
+}
+
+.infodate {
+  font-size: 20rpx;
+  color: #646464;
+  line-height: 40rpx;
+}
+
+.introduce {
+  margin: 0rpx 25rpx;
+  height: 310rpx;
+  border-bottom: 1rpx solid #bbb;
+  color: #646464;
+  font-size: 20rpx;
+}
+
+/*底部操作层*/
+
+.bottomvv {
+  width: 100vw;
+  height: 80rpx;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.bottomv {
+  width: 100vw;
+  height: 80rpx;
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+  display: flex;
+}
+
+.inputv {
+  display: flex;
+  height: 52rpx;
+  border-radius: 20rpx;
+  width: 350rpx;
+  background: #f2efef;
+  margin: 14rpx 20rpx 14rpx 25rpx;
+}
+
+.editicon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-left: 40rpx;
+  margin-top: 8rpx;
+}
+
+.optnumv {
+  display: flex;
+  font-size: 28rpx;
+  color: #646464;
+  line-height: 80rpx;
+  width: 150rpx;
+  background: #fff;
+}
+
+.commentt {
+  font-size: 24rpx;
+  color: #101010;
+  margin-left: 10rpx;
+  line-height: 52rpx;
+  height: 52rpx;
+}
+
+.opticon {
+  width: 36rpx;
+  height: 36rpx;
+  margin-right: 8rpx;
+  margin-top: 22rpx;
+}
+
+.optnumv::after {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.backimg {
+  width: 32rpx;
+  height: 32rpx;
+  display: block;
+  margin: 0rpx 20rpx;
+}

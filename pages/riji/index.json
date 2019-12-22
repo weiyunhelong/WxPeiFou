@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "navigationStyle":"custom",
+  "usingComponents": {
+    "commentscom": "../../components/comments/index"
+  }
 }

@@ -1,0 +1,48 @@
+/* components/publish/index.wxss */
+
+.actobjv {
+  padding: 0 48rpx 30rpx 48rpx;
+  display: flex;
+}
+
+.txicon {
+  width: 120rpx;
+  height: 120rpx;
+  margin-right: 20rpx;
+}
+
+.actinfov {
+  width: 530rpx;
+}
+
+.acttitle {
+  font-size: 28rpx;
+  color: #101010;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.actdate {
+  margin: 5rpx 0 15rpx 0;
+  font-size: 20rpx;
+  color: #ccc9c5;
+}
+
+.acticon {
+  width: 24rpx;
+  height: 24rpx;
+  margin-right: 5rpx;
+}
+
+.actoptv {
+  display: flex;
+}
+
+.acticonv {
+  display: flex;
+  font-size: 16rpx;
+  color: #ff9800;
+  line-height: 30rpx;
+  margin-right: 20rpx;
+}

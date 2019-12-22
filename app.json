@@ -1,16 +1,19 @@
 {
   "pages": [
     "pages/home/index",
-    "pages/my/index",
     "pages/fabu/index",
+    "pages/my/index",
+    "pages/list/index",
+    "pages/comment/index",
     "pages/search/index",
+    "pages/dongtai/list",
     "pages/dongtai/index",
-    "pages/dongtai/detail",
     "pages/user/index",
     "pages/about/index",
     "pages/pingjia/index",
     "pages/riji/index",
     "pages/wxlogin/auth",
+    "pages/custom/index",
     "pages/index/index",
     "pages/logs/logs"
   ],

@@ -9,9 +9,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    avatarUrl: '', //头像
-    nickName: '', //昵称
-    phone: '', //手机号码
+    nickName: '授权登录', //昵称
+    phone: '手机号码', //手机号码
     introduce: '', //个人简介
   },
 
@@ -19,7 +18,24 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
+    var that=this;
 
+    that.GetAppInfo();
+  },
+  GetAppInfo(){
+    var that=this;
+
+    var url = getApp().globalData.DBrequesturl + '/GetSetInfo';
+    var params = {
+    };
+    //TODO 后台解密获取手机号码
+    WxRequest.PostRequest(url, params).then(res => {
+      console.log("获取系统信息失败:", res);
+    
+
+    }).catch(res => {
+      Tools.ShowAlert(2, "获取系统信息失败");
+    })
   },
   onGotUserInfo(e) { //授权登录
 
@@ -30,24 +46,32 @@ Page({
     getApp().globalData.userInfo = e.detail.userInfo;
 
     that.setData({
-      avatarUrl: e.detail.userInfo.avatarUrl, //头像
       nickName: e.detail.userInfo.nickName, //昵称
     })
-    Tools.ShowAlert(1,"授权成功");
+    Tools.ShowAlert(1, "授权成功");
   },
   getphonenumber(e) { //手机号码
     var that = this;
-    console.log("手机号码信息:", e);
 
+    var url = getApp().globalData.DBrequesturl + '/GetMobile';
     var params = {
       encryptedData: e.detail.encryptedData,
       iv: e.detail.iv,
+      session_key: getApp().globalData.Token
     };
     //TODO 后台解密获取手机号码
-    that.setData({
-      phone: ''
+    WxRequest.GetRequest(url, params).then(res => {
+      console.log("手机号码:", res);
+      that.setData({
+        phone: res.data
+      })
+      Tools.ShowAlert(1, "手机号获取成功");
+
+    }).catch(res => {
+
+      Tools.ShowAlert(2, "手机号获取失败");
     })
-    Tools.ShowAlert(1, "手机号获取成功");
+
   },
   getintroduce(e) { //个人简介
     var that = this;
@@ -58,22 +82,41 @@ Page({
   postopt() { //点击完成
     var that = this;
     //参数部分
-    var avatarUrl = that.data.avatarUrl, //头像
-      nickName = that.data.nickName, //昵称
+    var nickName = that.data.nickName, //昵称
       phone = that.data.phone, //手机号码
       introduce = that.data.introduce; //个人简介
 
     if (that.data.nickName == "") {
-      Tools.ShowAlert(0,"请点击授权登录");
+      Tools.ShowAlert(0, "请点击授权登录");
     } else if (that.data.phone == "") {
-      Tools.ShowAlert(0,"请点击手机号码");
+      Tools.ShowAlert(0, "请点击手机号码");
     } else if (that.data.introduce == "") {
-      Tools.ShowAlert(0,"请完善个人简介");
+      Tools.ShowAlert(0, "请完善个人简介");
     } else {
       //TODO 提交数据，返回前一个页面
+      var url = getApp().globalData.DBrequesturl +'/SaveWxUser';
+      var userInfo = getApp().globalData.userInfo;
+      var parmas = {
+        openid: getApp().globalData.openId,
+        nickName: userInfo.nickName,
+        avatarUrl: userInfo.avatarUrl,
+        province: userInfo.province,
+        city: userInfo.city,
+        district: userInfo.country,
+        gender: userInfo.gender,
+        mobile: phone,
+        desc: introduce,
+      };
 
-      wx.navigateBack({
-        delta: 1
+      WxRequest.GetRequest(url, parmas).then(res => {
+        console.log("保存的结果:", res);
+        getApp().globalData.hasUserInfo = true;
+        getApp().globalData.userDesc = introduce;
+        wx.navigateBack({
+          delta: 1
+        })
+      }).catch(res => {
+        console.error("保存的结果:", res);
       })
     }
   },

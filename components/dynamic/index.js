@@ -20,6 +20,8 @@ Component({
           date: newVal.date,
           starttime: newVal.starttime,
           endtime: newVal.endtime,
+          type: newVal.type,
+          hasUserInfo: getApp().globalData.hasUserInfo,
         })
       }
     },
@@ -29,6 +31,7 @@ Component({
    * 组件的初始数据
    */
   data: {
+    hasUserInfo: false,
     id: 0,
     avatarUrl: '',
     title: '',
@@ -46,9 +49,15 @@ Component({
   methods: {
     godetail() { //点击跳转到动态详情
       var that = this;
-      wx.navigateTo({
-        url: '../../pages/dongtai/index?id=' + that.data.id,
-      })
+      if (!that.data.hasUserInfo) {
+        wx.navigateTo({
+          url: '../wxlogin/auth',
+        })
+      } else {
+        wx.navigateTo({
+          url: '../../pages/dongtai/index?id=' + that.data.id + '&money=' + that.data.price
+        })
+      }
     },
   }
 })

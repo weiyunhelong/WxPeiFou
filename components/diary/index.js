@@ -18,6 +18,7 @@ Component({
           avatarUrl: newVal.avatarUrl,
           nickName: newVal.nickName,
           zannum: newVal.zannum,
+          hasUserInfo: getApp().globalData.hasUserInfo,
         })
       }
     },
@@ -27,7 +28,14 @@ Component({
    * 组件的初始数据
    */
   data: {
-
+    hasUserInfo: false,
+    id: 0,
+    cover: '',
+    title: '',
+    date: '',
+    avatarUrl: '',
+    nickName: '',
+    zannum: '',
   },
 
   /**
@@ -35,9 +43,16 @@ Component({
    */
   methods: {
     godetail() { //点击跳转到详情
-      wx.navigateTo({
-        url: '../../pages/riji/index?id=0',
-      })
+      var that = this
+      if (!that.data.hasUserInfo) {
+        wx.navigateTo({
+          url: '../wxlogin/auth',
+        })
+      } else {
+        wx.navigateTo({
+          url: '../../pages/riji/index?id='+that.data.id,
+        })
+      }
     },
   }
 })

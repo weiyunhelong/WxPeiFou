@@ -1,0 +1,23 @@
+<!--pages/dongtai/list.wxml-->
+<!--个人信息-->
+<view class="topv">
+  <image src="/resources/tx.jpeg" class="tximg"></image>
+  <view class="userinfo">
+    <view class="nickname">小美</view>
+    <view class="desc">介绍信息</view>
+  </view>
+</view>
+
+<view class="diaryv">
+  <view class="leftv">
+    <block wx:for="{{datas}}" wx:key="item" wx:for-index="x">
+      <diarycom receiveData="{{item}}" wx:if="{{x%2==0}}" />
+    </block>
+  </view>
+
+  <view class="rightv">
+    <block wx:for="{{datas}}" wx:key="item" wx:for-index="x">
+      <diarycom receiveData="{{item}}" wx:if="{{x%2!=0}}" />
+    </block>
+  </view>
+</view>

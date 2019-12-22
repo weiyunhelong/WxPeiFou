@@ -1,0 +1,66 @@
+/* components/comments/index.wxss */
+.pinglunv {
+  margin: 20rpx 25rpx 0 25rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 1rpx solid #bbb;
+}
+
+.userv {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 18rpx;
+}
+
+.leftv {
+  width: 300rpx;
+  display: flex;
+}
+
+.tximg {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 10rpx;
+  border-radius: 20rpx;
+}
+
+.nickName {
+  color: #ccc9c5;
+  font-size: 24rpx;
+  line-height: 40rpx;
+  margin-right: 38rpx;
+}
+
+.date {
+  color: #646464;
+  font-size: 20rpx;
+  line-height: 40rpx;
+}
+
+.zanv {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.zanicon {
+  width: 28rpx;
+  height: 28rpx;
+  margin-right: 12rpx;
+  margin-top: 6rpx;
+}
+
+.zannum {
+  color: #646464;
+  font-size: 20rpx;
+  line-height: 40rpx;
+}
+
+.commentv {
+  font-size: 20rpx;
+  color: #646464;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}

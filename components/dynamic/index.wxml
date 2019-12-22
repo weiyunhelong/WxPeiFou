@@ -4,7 +4,7 @@
   <view class="infov">
     <view class="title">{{title}}</view>
     <view class="price" wx:if="{{price==0}}">免费</view>
-    <view class="price" wx:else>赏金:<text decode="true">&nbsp;</text> ¥{{price}}元</view>
+    <view class="price" wx:else>{{type==1?'赏金:':'佣金:'}}<text decode="true">&nbsp;</text> ¥{{price}}元</view>
     <view class="optv">
       <view class="optinfo">
         <view class="addressv">
