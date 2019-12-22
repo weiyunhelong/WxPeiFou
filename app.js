@@ -10,14 +10,6 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
     var that = this;
-
-    wx.showLoading({
-      title: '数据加载中...',
-      mask: true
-    })
-
-   
-
   },
   //获取小程序的OpenId
   GetWxOpenId() {
@@ -31,10 +23,9 @@ App({
           if (res.code) {
             //发送res.code 到后台
             wx.request({
-              url: that.globalData.DBrequesturl + '/auth/wechat/login',
-              method: 'POST',
+              url: that.globalData.DBrequesturl + '/WxLogin',
+              method: 'GET',
               data: {
-                store_id: that.globalData.store_id,
                 code: res.code
               },
               success: function (ress) {
@@ -43,6 +34,7 @@ App({
                 that.globalData.openId = ress.data.openid;
                 that.globalData.Token = ress.data.session_key;
                 that.globalData.unionid = ress.data.unionid;
+                that.globalData.hasUserInfo = ress.data.haduserinfo;
 
                 var resArg = ress.data.openid;
                 resolve(resArg)
@@ -66,16 +58,14 @@ App({
     // 登录,获取openid
     that.GetWxOpenId();
   },  
-  onHide: function (options){
-    console.log("AAAA");
-  },
   globalData: {
     userInfo: null, //微信用户信息
     AddressApi: "https://api.map.baidu.com", //根据经纬度获取城市
-    DBrequesturl: "https://uat-gateway.connectplus.asaplus.com.cn", //API接口
+    DBrequesturl: "http://localhost:6348/api/DataApi", //API接口
     openId: "", //OPENID
     Token: "", //session_key
     unionid: '', //unionid
     statusBarHeight: wx.getSystemInfoSync()['statusBarHeight'],//自定义顶部状态栏使用
+    hasUserInfo:false,//用户信息是否完善
   }
 })
