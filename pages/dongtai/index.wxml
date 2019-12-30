@@ -84,9 +84,9 @@
     <image src="/resources/tel.png" class="opticon"></image>
     <view class="opttxt">联系</view>
   </view>
-  <view class="linev" wx:if="{{money!=0}}"></view>
-  <view class="optv"  wx:if="{{money!=0}}" bindtap="payforopt">
+  <view class="linev"></view>
+  <view class="optv" bindtap="bookopt">
     <image src="/resources/money.png" class="opticon"></image>
-    <view class="opttxt">支付</view>
+    <view class="opttxt">报名</view>
   </view>
 </view>

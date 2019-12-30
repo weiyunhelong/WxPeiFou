@@ -42,63 +42,64 @@ Page({
    */
   onShow: function() {
     var that = this;
+    //获取用户信息
+    that.GetUserInfo();
     //获取用户的发布
     that.GetUserDynamic();
   },
-  GetUserDynamic() {
+  //获取用户信息
+  GetUserInfo(){
+    var that=this;
+
+    var url = getApp().globalData.DBrequesturl + '/GetWxUserDetail';
+    var params = {
+      openid: that.data.userId
+    };
+    WxRequest.GetRequest(url, params).then(res => {
+      console.log("用户信息:", res);
+
+      that.setData({
+        wxuserobj: res.data
+      })
+    }).catch(res => {
+      console.error("用户信息报错:", res);
+    })
+  },
+  GetUserDynamic() {//获取用户的发布
     var that = this;
     //参数部分
     var userId=that.data.userId, 
       pageindex = that.data.pageindex,
       pagesize = that.data.pagesize;
 
-    var datas = [{
-        id: 1,
-        cover: '/resources/tx.jpeg',
-        title: '我想找人陪我打篮球',
-        date: '2019.11.19',
-        zannum: 100,
-        sharenum: 100,
-        msgnum: 100
-      },
-      {
-        id: 2,
-        cover: '/resources/tx.jpeg',
-        title: '我想找人陪我打篮球',
-        date: '2019.11.19',
-        zannum: 100,
-        sharenum: 100,
-        msgnum: 100
-      }, {
-        id: 3,
-        cover: '/resources/tx.jpeg',
-        title: '我想找人陪我打篮球我想找人陪我打篮球我想找人陪我打篮球我想找人陪我打篮球',
-        date: '2019.11.19',
-        zannum: 100,
-        sharenum: 100,
-        msgnum: 100
-      }, {
-        id: 4,
-        cover: '/resources/tx.jpeg',
-        title: '我想找人陪我打篮球',
-        date: '2019.11.19',
-        zannum: 100,
-        sharenum: 100,
-        msgnum: 100
-      }, {
-        id: 5,
-        cover: '/resources/tx.jpeg',
-        title: '我想找人陪我打篮球',
-        date: '2019.11.19',
-        zannum: 100,
-        sharenum: 100,
-        msgnum: 100
-      }
-    ];
+    var that = this;
 
-    that.setData({
-      datas: datas
+    var url = getApp().globalData.DBrequesturl + '/GetWxUserDynamic';
+    var params = {
+      openid: that.data.userId,
+      page: pageindex,
+      rows: pagesize
+    };
+    WxRequest.GetRequest(url, params).then(res => {
+      console.log("发布陪伴列表:", res);
+      if(res.data!="-1"){
+        if (that.data.pageindex == 1) {
+          that.setData({
+            datas: res.data
+          })
+        } else {
+          var datalist = that.data.datas;
+          datalist.concat(res.data);
+          that.setData({
+            datas: datalist.data
+          })
+        }
+      }      
+      
+    }).catch(res => {
+      console.error("发布陪伴列表报错:", res);
     })
+
   },
   /**
    * 生命周期函数--监听页面隐藏

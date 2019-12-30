@@ -1,25 +1,24 @@
 <!--pages/user/index.wxml-->
 <!--个人信息-->
 <view class="topv">
-  <image src="/resources/tx.jpeg" class="tximg"></image>
+  <image src="{{wxuserobj.AvatarUrl}}" class="tximg"></image>
   <view class="userinfo">
-    <view class="nickname">小美</view>
-    <view class="desc">介绍信息</view>
+    <view class="nickname">{{wxuserobj.NickName}}</view>
+    <view class="desc">{{wxuserobj.Introduce}}</view>
   </view>
 </view>
 
 <!--联系方式-->
 <view class="concatv">
   <view class="title">联系方式</view>
-  <view class="infov">手机号码：188xxxxxxxx </view>
-  <view class="infov">微信号：56453423 </view>
+  <view class="infov">手机号码：{{wxuserobj.Mobile}}</view>
+  <!-- <view class="infov">微信号：{{wxuserobj.Mobile}} </view> -->
 </view>
 
 <!--个人介绍-->
 <view class="concatv">
   <view class="title">个人介绍</view>
-  <view class="infocv">个人介绍个人介绍个人介绍个人介绍个人介绍个人介绍 个人介绍个人介绍个人介绍个人介绍个人介绍
-  </view>
+  <view class="infocv">{{wxuserobj.Introduce}}</view>
 </view>
 
 <!--历史发布-->

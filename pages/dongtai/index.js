@@ -17,7 +17,7 @@ Page({
     duration: 1000,
 
     /*活动信息*/
-    imgs: [],//活动的图   
+    imgs: [], //活动的图   
     markers: [{
       id: 1,
       latitude: '0',
@@ -26,17 +26,19 @@ Page({
       width: 32,
       height: 32
     }],
-    dataobj:{},//详情
+    dataobj: {}, //详情
+    account: 0, //账户余额
+    isbook: false, //是否已报名
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    console.log("接受参数", options);
+
     this.setData({
       id: options.id,
-      money:options.money
+      money: options.money
     })
   },
   //获取图片真实宽度  
@@ -55,19 +57,19 @@ Page({
       height: e.detail.height,
     });
   },
-  gouserdetail(){//点击跳转到用户详情
-    var that=this;
+  gouserdetail() { //点击跳转到用户详情
+    var that = this;
     wx.navigateTo({
-      url: '../user/index?id=' + that.data.userId,
+      url: '../user/index?userId=' + that.data.wxuser.OpenId,
     })
   },
-  previewimg(){//点击微信二维码
-     var that=this;
-     wx.previewImage({
-       urls: [that.data.dataobj.Wxcode],
-     })
+  previewimg() { //点击微信二维码
+    var that = this;
+    wx.previewImage({
+      urls: [that.data.dataobj.Wxcode],
+    })
   },
-  gocommentopt(){//点击用户评价
+  gocommentopt() { //点击用户评价
     var that = this;
     wx.navigateTo({
       url: '../pingjia/index?id=' + that.data.id,
@@ -79,10 +81,127 @@ Page({
       phoneNumber: that.data.dataobj.Phone
     })
   },
-  payforopt(){//发起支付
-    wx.showToast({
-      title: '支付成功',
+  bookopt() { //报名操作
+    var that = this;
+
+    var url = getApp().globalData.DBrequesturl + "/BookDynamic";
+    var parmas = {
+      id: that.data.id,
+      openid: getApp().globalData.openId,
+      type: that.data.dataobj.Type
+    };
+
+    WxRequest.GetRequest(url, parmas).then(res => {
+      console.log("报名结果", res);
+      if (res.data > 0) {
+        if (that.data.money != 0) {
+          if (that.data.account == 0) {
+            that.BookMoney(res.data, 1); //微信支付报名钱
+          } else {
+            that.PayForBook(res.data, 1); //账户余额支付
+          }
+        } else {
+          that.UpdateBookStatus(res.data, 0);
+        }
+      } else if (res.data == -2) {
+        wx.showToast({
+          title: '已报名',
+          icon: 'none'
+        })
+      } else if (res.data == -3) {
+        wx.showToast({
+          title: '报名已截止',
+          icon: 'none'
+        })
+      } else {
+        wx.showToast({
+          title: '报名失败',
+          icon: 'none'
+        })
+      }
+    }).catch(res => {
+      console.log("报名结果err", res);
     })
+  },
+  BookMoney(bookid) { //微信支付报名钱
+    var that = this;
+
+    var url = getApp().globalData.DBrequesturl + "/PayForDynamic";
+    var params = {
+      money: 1,
+      openid: getApp().globalData.openId
+    };
+
+    WxRequest.GetRequest(url, params)
+      .then(res => {
+        wx.requestPayment({
+          timeStamp: res.data.timeStamp,
+          nonceStr: res.data.nonceStr,
+          package: res.data.package,
+          signType: res.data.signType,
+          paySign: res.data.paySign,
+          success: function() {
+
+            //更新报名的状态
+            that.UpdateBookStatus(bookid, 1);
+          },
+          fail: function() {
+
+            wx.showToast({
+              title: '报名失败',
+              icon: 'none'
+            })
+          }
+        })
+      })
+      .catch(res => {
+        wx.showToast({
+          title: '报名失败',
+          icon: 'none'
+        })
+      })
+  },
+  PayForBook(bookid) { //账户余额支付
+    var that = this;
+
+    var url = getApp().globalData.DBrequesturl + "/DynamicPayfor";
+    var params = {
+      openid: getApp().globalData.openId,
+      money: that.data.money
+    };
+    WxRequest.GetRequest(url, params)
+      .then(res => {
+        that.UpdateBookStatus(bookid, 1);
+      })
+      .catch(res => {
+        wx.showToast({
+          title: '报名失败',
+          icon: 'none'
+        })
+      })
+  },
+  UpdateBookStatus(bookid, ispayfor) { //更新报名状态
+    var that = this;
+
+    var url = getApp().globalData.DBrequesturl + "/UpdateBookStatus";
+    var params = {
+      bookid: bookid,
+      ispayfor: ispayfor,
+      money: that.data.money
+    };
+    WxRequest.GetRequest(url, params)
+      .then(res => {
+        that.GetActivityID(2,bookid);
+        wx.showToast({
+          title: '报名成功'
+        })
+      })
+      .catch(res => {
+        wx.showToast({
+          title: '报名失败',
+          icon: 'none'
+        })
+      })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -102,14 +221,18 @@ Page({
         that.GetDynamicInfo();
 
         that.GetComments();
+
+        that.GetWxUserInfo();
       })
     } else {
       that.GetDynamicInfo();
 
       that.GetComments();
+
+      that.GetWxUserInfo();
     }
   },
-  GetDynamicInfo(){//获取动态详情
+  GetDynamicInfo() { //获取动态详情
     var that = this;
 
     //TODO 获取动态的详情
@@ -119,7 +242,7 @@ Page({
     };
 
     WxRequest.GetRequest(url, params).then(res => {
-      var markers= [{
+      var markers = [{
         id: 1,
         latitude: res.data.Dynamic.lat,
         longitude: res.data.Dynamic.lng,
@@ -134,14 +257,99 @@ Page({
         date: res.data.Date, //日期
         startdt: res.data.StartDt, //开始时间
         enddt: res.data.EndDt, //开始时间
-        markers:markers
+        markers: markers, //定点
+        isbook: res.data.Isbook == 1, //是否报名
       })
+      //获取动态消息ID
+      if (res.data.Isbook == 1) {
+        that.GetActivityID(1,0);
+      }
     }).catch(res => {
       console.error("获取详情失败!", res);
     })
   },
-  GetComments() {//获取动态评论列表
+  GetActivityID(type,bookid) { //获取动态消息ID
+    var that = this;
 
+    var url = getApp().globalData.DBrequesturl + "/GetActivityID";
+    var params = {
+      dynamicid: that.data.id,
+      number: that.data.dataobj.Number
+    };
+
+    WxRequest.GetRequest(url, params)
+      .then(res => {
+        that.setData({
+          activityId: res.data.ActivityID
+        })
+        //更新分享消息的部分
+        that.UpdateShareMsg(res.data);
+        if(type==2){
+          that.UpdateMsgShare(bookid);
+        }
+      }).catch(res => {
+        console.log("获取动态消息失败");
+      })
+  },
+  UpdateShareMsg(resobj) { //更新动态消息
+    var that = this;
+
+    wx.updateShareMenu({
+      withShareTicket: true,
+      isUpdatableMessage: true,
+      activityId: resobj.ActivityID,
+      targetState: 0,
+      templateInfo: {
+        parameterList: [{
+          name: 'member_count',
+          value: resobj.Bookber
+        }, {
+          name: 'room_limit',
+          value: resobj.Number
+        }, {
+          name: 'version_type',
+          value: 'trial'
+        }]
+      }
+    })
+
+  },
+  UpdateMsgShare(bookid){//更新动态消息
+    var that = this;
+
+    var url = getApp().globalData.DBrequesturl + '/UpdateActivityMsg';
+    var params = {
+      dynamicid: that.data.id,
+      bookid: bookid
+    };
+    WxRequest.GetRequest(url, params).then(res => {
+      console.log("更新动态消息成功:", res);
+    }).catch(res => {
+      console.error("更新动态消息失败:", res);
+    })
+  },
+  GetComments() { //获取动态评论列表
+
+  },
+  GetWxUserInfo() { //获取用户信息，账户余额
+    var that = this;
+
+    var url = getApp().globalData.DBrequesturl + '/GetWxUserDetail';
+    var params = {
+      openid: getApp().globalData.openId
+    };
+    WxRequest.GetRequest(url, params).then(res => {
+      console.log("用户信息:", res);
+
+      that.setData({
+        account: res.data.Money == null ? 0 : res.data.Money
+      })
+    }).catch(res => {
+      console.error("用户信息报错:", res);
+      that.setData({
+        account: 0
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面隐藏
@@ -181,7 +389,7 @@ Page({
     var params = {
       id: that.data.id,
       openid: getApp().globalData.openId,
-      type:that.data.dataobj.Type
+      type: that.data.dataobj.Type
     };
     WxRequest.GetRequest(url, params).then(res => {
       console.error("分享成功", res);

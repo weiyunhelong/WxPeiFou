@@ -1,21 +1,23 @@
 <!--components/publish/index.wxml-->
+<wxs src="./format.wxs" module="tools" />
+
 <view class="actobjv" bindtap="godetail">
-  <image src="{{dataobj.cover}}" class="txicon"></image>
+  <image src="{{dataobj.Cover}}" class="txicon"></image>
   <view class="actinfov">
-    <view class="acttitle">{{dataobj.title}}</view>
-    <view class="actdate">{{dataobj.date}}</view>
+    <view class="acttitle">{{dataobj.Title}}</view>
+    <view class="actdate">{{tools.formatDate(dataobj.UpdateTime)}}</view>
     <view class="actoptv">
       <view class="acticonv">
         <image src="/resources/zan.png" class="acticon"></image>
-        <view class="acticonnum">{{dataobj.zannum}}</view>
+        <view class="acticonnum">{{dataobj.ZanNum}}</view>
       </view>
       <view class="acticonv">
         <image src="/resources/share.png" class="acticon"></image>
-        <view class="acticonnum">{{dataobj.sharenum}}</view>
+        <view class="acticonnum">{{dataobj.ShareNum}}</view>
       </view>
-      <view class="acticonv"> 
+      <view class="acticonv">
         <image src="/resources/msgh.png" class="acticon"></image>
-        <view class="acticonnum">{{dataobj.msgnum}}</view>
+        <view class="acticonnum">{{dataobj.ComNum}}</view>
       </view>
     </view>
   </view>
