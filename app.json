@@ -3,9 +3,12 @@
     "pages/home/index",
     "pages/fabu/index",
     "pages/my/index",
+    "pages/join/index",
+    "pages/fabu/my",
     "pages/list/index",
     "pages/comment/index",
     "pages/search/index",
+    
     "pages/dongtai/list",
     "pages/dongtai/index",
     "pages/user/index",

@@ -1,5 +1,6 @@
 <!--pages/comment/index.wxml-->
-<!--评论部分-->
-<block wx:for="{{comments}}" wx:key="item">
-  <commentscom receiveData="{{item}}" />
+<block wx:if="{{showdata}}">
+  <block wx:for="{{comments}}" wx:key="item">
+    <commentscom receiveData="{{item}}" />
+  </block>
 </block>

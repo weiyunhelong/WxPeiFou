@@ -77,7 +77,7 @@ Page({
         })
         that.GetAppSet();
         that.GetLooks();
-        //that.GetProvides();
+        that.GetProvides();
         that.GetDiarys();
 
         setTimeout(function() {
@@ -93,7 +93,7 @@ Page({
       })
       that.GetAppSet();
       that.GetLooks();
-      //that.GetProvides();
+      that.GetProvides();
       that.GetDiarys();
 
       setTimeout(function() {

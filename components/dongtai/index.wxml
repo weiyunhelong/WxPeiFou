@@ -1,0 +1,18 @@
+<!--components/dynamic/index.wxml-->
+<view class="recordv" bindtap="godetail">
+  <image src="{{dataobj.Cover}}" mode="aspectFit" class="tximg"></image>
+  <view class="infov">
+    <view class="title">{{dataobj.Title}}</view>
+    <view class="price" wx:if="{{dataobj.Money==0}}">免费</view>
+    <view class="price" wx:else>{{dataobj.Type==1?'赏金:':'佣金:'}}<text decode="true">&nbsp;</text> ¥{{dataobj.Money}}元</view>
+    <view class="optv">
+      <view class="optinfo">
+        <view class="addressv">
+          <view class="areav">{{dataobj.District}}</view>
+        </view>
+        <view class="date">{{dt}}</view>
+      </view>
+      <view class="chkbtn">点击查看</view>
+    </view>
+  </view>
+</view>

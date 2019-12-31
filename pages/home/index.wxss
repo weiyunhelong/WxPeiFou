@@ -20,9 +20,9 @@
 
 .tipv {
   width: 100%;
-  height: 300rpx;
+  height: 500rpx;
   text-align: center;
-  line-height: 300rpx;
+  line-height: 500rpx;
   color: #999;
   font-size: 28rpx;
 }

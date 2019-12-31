@@ -1,0 +1,33 @@
+<!--pages/fabu/my.wxml-->
+<!--TAB-->
+<view class="tabv">
+  <view class="{{chktab==1?'chktabv':'nochktabv'}}" bindtap="chktabopt" data-tab="1">提供陪伴</view>
+  <view class="{{chktab==2?'chktabv':'nochktabv'}}" bindtap="chktabopt" data-tab="2">寻找陪伴</view>
+  <view class="{{chktab==3?'chktabv':'nochktabv'}}" bindtap="chktabopt" data-tab="3">日记动态</view>
+</view>
+
+
+<!--日记动态数据部分-->
+<block wx:if="{{chktab==3&&showdata}}">
+  <view class="diaryv">
+    <view class="leftv">
+      <block wx:for="{{datalist}}" wx:key="item" wx:for-index="x">
+        <diarycom receiveData="{{item}}" wx:if="{{x%2==0}}" />
+      </block>
+    </view>
+
+    <view class="rightv">
+      <block wx:for="{{datalist}}" wx:key="item" wx:for-index="x">
+        <diarycom receiveData="{{item}}" wx:if="{{x%2!=0}}" />
+      </block>
+    </view>
+  </view>
+</block>
+
+<!--陪伴数据部分-->
+<block wx:if="{{chktab!=3&&showdata}}">
+  <block wx:for="{{datalist}}" wx:key="item">
+    <dynamiccom receiveData="{{item}}" />
+  </block>
+  <view class="nodatav" wx:if="{{datalist.length==0}}">暂未无参加数据</view>
+</block>

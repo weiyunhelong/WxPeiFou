@@ -1,0 +1,63 @@
+/* pages/fabu/my.wxss */
+
+/*TAB部分*/
+.tabv {
+  display: flex;
+  justify-content: space-between;
+  width: 100vw;
+  height: 150rpx;
+  line-height: 150rpx;
+  text-align: center;
+  font-size: 40rpx;
+  border-top: 1rpx solid #8c8c8c;
+  border-bottom: 1rpx solid #8c8c8c;
+}
+
+.chktabv {
+  width: 33vw;
+  background: #ff9800;
+  color: #fff;
+  border-top: 1rpx solid #ff9800;
+  border-bottom: 1rpx solid #ff9800;
+  height: 150rpx;
+  margin-top: -1rpx;
+}
+
+.nochktabv {
+  width: 33vw;
+  background: #fff;
+  color: #000;
+  height: 148rpx;
+}
+
+.nodatav{
+  width: 100vw;
+  height: 500rpx;
+  text-align: center;
+  line-height: 500rpx;
+  font-size: 28rpx;
+  color: #999;
+}
+/*日记部分*/
+
+.diaryv {
+  display: flex;
+  width: 100vw;
+}
+
+.leftv {
+  margin: 0 14rpx 0 24rpx;
+}
+
+.morebtn {
+  width: 710rpx;
+  height: 90rpx;
+  line-height: 90rpx;
+  border-radius: 10rpx;
+  background-color: #fff;
+  text-align: center;
+  border: 1rpx solid #ff9800;
+  font-size: 36rpx;
+  color: #ff9800;
+  margin: 12rpx auto;
+}

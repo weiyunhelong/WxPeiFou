@@ -1,4 +1,7 @@
 // pages/pingjia/index.js
+var WxRequest = require('../../utils/WxRequest.js');
+var Tools = require('../../utils/util.js'); //提示
+
 Page({
 
   /**
@@ -6,9 +9,10 @@ Page({
    */
   data: {
     id: 0, //活动id
-    comment: '',//评价内容
+    type: 1, //1为提供陪伴 2为寻找陪伴
+    comment: '', //评价内容
     imgs: [], //评价图片
-    didian:''
+    didian: ''
   },
 
   /**
@@ -16,7 +20,8 @@ Page({
    */
   onLoad: function(options) {
     this.setData({
-      id: options.id, //活动id
+      id: parseInt(options.id), //活动id
+      type: parseInt(options.type)
     })
   },
 
@@ -33,18 +38,26 @@ Page({
       count: 9 - imgs.length,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
-      success: function(res) {
+      success: function (res) {
+
+        wx.showLoading({
+          title: '图片上传中...',
+        })
 
         var files = res.tempFilePaths;
         for (var i = 0; i < files.length; i++) {
-          var serverpath = that.Upload2Server(files[i]);
 
-          imgs.push(serverpath);
+          that.Upload2Server(files[i]).then(res => {
+            var serverpath = res;
+            imgs.push(serverpath);
+            that.setData({
+              imgs: imgs
+            })
+          });
+
         }
+        wx.hideLoading();
 
-        that.setData({
-          imgs: imgs
-        })
       },
     })
   },
@@ -61,13 +74,32 @@ Page({
     })
   },
   Upload2Server(filepath) { //将图片上传到服务，并返回服务器地址
-    return filepath;
+    var that = this;
+    var promise = new Promise((resolve, reject) => {
+      var url = getApp().globalData.DBrequesturl + '/UploadImg';
+      wx.uploadFile({
+        url: url,
+        filePath: filepath,
+        name: 'file',
+        header: {},
+        formData: {},
+        success: function(res) {
+          var resobj = getApp().globalData.MideaUrl + res.data.substr(1, res.data.length - 2);
+          resolve(resobj);
+        },
+        fail: function(res) {
+          utils.ShowAlert(2, '上传图片失败!');
+          reject('网络超时出错');
+        },
+      })
+    });
+    return promise;
   },
   getdiweiopt() { //地址定位
     var that = this;
 
     wx.chooseLocation({
-      success: function (res) {
+      success: function(res) {
         console.log("地址信息", res);
         that.setData({
           didian: res.address,
@@ -75,7 +107,7 @@ Page({
           ddlng: res.longitude, //日记地点经纬度
         })
       },
-      fail: function () {
+      fail: function() {
         wx.showModal({
           title: '温馨提示',
           content: '请允许授权获取到您的地理位置',
@@ -84,7 +116,7 @@ Page({
             if (res.confirm) {
 
               wx.openSetting({
-                success: function (data) {
+                success: function(data) {
                   if (data.authSetting["scope.userLocation"] === true) {
                     that.getdiweiopt();
                   }
@@ -96,28 +128,55 @@ Page({
       },
     })
   },
-  fabuopt() { //发布动态
+  fabuopt() { //评价
     var that = this;
 
     var comment = that.data.comment, //评价内容
       imgs = that.data.imgs, //评价图
-      didian=that.data.didian;//地点
+      didian = that.data.didian; //地点
 
     if (comment == "") {
-      utils.ShowAlert(0, '请输入评价内容');
-    }else {
-      that.ClearDongtai();
-      utils.ShowAlert(1, '发布成功');
+      Tools.ShowAlert(0, '请输入评价内容');
+    } else {
+
+      var url = getApp().globalData.DBrequesturl + '/CommentDynamic';
+      var params = {
+        openid: getApp().globalData.openId,
+        id: that.data.id,
+        address: that.data.didian,
+        imgs: that.Imgs2Str(that.data.imgs),
+        contenxt: that.data.comment,
+        type: that.data.type
+      };
+      WxRequest.GetRequest(url, params).then(res => {
+        console.log("发表评价成功", res);
+        if (res.data == "0") {
+          WxRequest.ImgSecCheck(comment);
+          Tools.ShowAlert(1, '发布成功');
+
+          setTimeout(function(){
+            wx.navigateBack({
+              delta: 1
+            })
+          },1000)
+          
+        } else {
+          Tools.ShowAlert(0, '评价失败');
+        }
+
+      }).catch(res => {
+        console.error("获取动态失败", res);
+        Tools.ShowAlert(0, '评价失败');
+      })
     }
   },
-  ClearPeiBan() { //清除数据
-    var that = this;
-
-    that.setData({
-      comment: '', //内容
-      imgs: [], //图片
-      didian:""
+  Imgs2Str(imgs) { //将图片数组转为字符串，用逗号分隔
+    var result = "";
+    imgs.forEach(function(v, i) {
+      result += v + ",";
+      WxRequest.ImgSecCheck(v);
     })
+    return result;
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

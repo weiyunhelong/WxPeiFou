@@ -12,12 +12,7 @@ Component({
         //赋值
         that.setData({
           id: newVal.Id,
-          cover: newVal.cover,
-          title: newVal.title,
-          date: newVal.date,
-          avatarUrl: newVal.avatarUrl,
-          nickName: newVal.nickName,
-          zannum: newVal.zannum,
+          dataobj: newVal,
           hasUserInfo: getApp().globalData.hasUserInfo,
         })
       }
@@ -30,12 +25,7 @@ Component({
   data: {
     hasUserInfo: false,
     id: 0,
-    cover: '',
-    title: '',
-    date: '',
-    avatarUrl: '',
-    nickName: '',
-    zannum: '',
+    dataobj:{}
   },
 
   /**
@@ -50,7 +40,7 @@ Component({
         })
       } else {
         wx.navigateTo({
-          url: '../../pages/riji/index?id='+that.data.id,
+          url: '../riji/index?id='+that.data.id,
         })
       }
     },

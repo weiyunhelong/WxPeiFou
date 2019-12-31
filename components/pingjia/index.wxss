@@ -1,0 +1,40 @@
+/* components/comments/index.wxss */
+
+.pinglunv {
+  margin: 20rpx 25rpx 0 25rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 1rpx solid #bbb;
+  font-size: 28rpx;
+  line-height: 50rpx;
+}
+
+.objtitle{
+  font-size: 32rpx;
+  font-weight: bold;
+}
+
+.objtype{
+  color: #ff9800;
+  line-height: 50rpx;
+}
+
+.objdate{
+  color: #999;
+}
+.objimgv {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.objimg {
+  width: 335rpx;
+  margin-top: 20rpx;
+  margin-right: 20rpx;
+}
+
+.objaddress {
+  line-height: 50rpx;
+  margin: 20rpx 0;
+}

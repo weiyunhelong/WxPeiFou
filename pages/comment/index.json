@@ -1,5 +1,7 @@
 {
+  "navigationBarTitleText": "我的评论",
+  "enablePullDownRefresh": true,
   "usingComponents": {
-    "commentscom": "../../components/comments/index"
+    "commentscom": "../../components/pingjia/index"
   }
 }

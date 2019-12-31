@@ -1,0 +1,13 @@
+<!--components/comments/index.wxml-->
+<view class="pinglunv">
+  <view class="objtitle">{{dataobj.title}}</view>
+  <view class="objtype">{{dataobj.type=='1'?"提供陪伴":"寻找陪伴"}}</view>
+  <view class="objdate">{{dataobj.date}}</view>
+  <view class="objconent">{{dataobj.conentc}}</view>
+  <view class="objimgv">
+    <block wx:for="{{dataobj.swipers}}" wx:key="item" wx:for-index="x">
+      <image src="{{item}}" class="objimg" bindtap="preimgopt" data-index="{{x}}" wx:if="{{item!=''}}" mode="widthFix"></image>
+    </block>
+  </view>
+  <view class="objaddress">{{dataobj.address}}</view>
+</view>

@@ -28,13 +28,22 @@ Page({
   },
   golist(e) { //我发布1；我参与2；我动态3
     var that = this;
+    var type = parseInt(e.currentTarget.dataset.type);
     if (!that.data.hasUserInfo) {
       wx.navigateTo({
         url: '../wxlogin/auth',
       })
-    } else {
+    } else if (type==1){
       wx.navigateTo({
-        url: '../list/index?type=' + e.currentTarget.dataset.type,
+        url: '../fabu/my'
+      })
+    } else if (type == 2) {
+      wx.navigateTo({
+        url: '../join/index'
+      })
+    } else if (type == 3) {
+      wx.navigateTo({
+        url: '../list/index'
       })
     }
   },

@@ -72,7 +72,7 @@ Page({
   gocommentopt() { //点击用户评价
     var that = this;
     wx.navigateTo({
-      url: '../pingjia/index?id=' + that.data.id,
+      url: '../pingjia/index?id=' + that.data.id + '&type=' + that.data.dataobj.Type
     })
   },
   makecallopt() { //拨打电话

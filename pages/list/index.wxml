@@ -1,32 +1,5 @@
 <!--pages/list/index.wxml-->
-<!--寻找陪伴-->
-<block wx:if="{{type!=3}}">
-
-  <view class="category">寻找陪伴</view>
-
-  <block wx:for="{{looks}}" wx:key="item">
-    <dynamiccom receiveData="{{item}}" />
-  </block>
-
-  <view class="morebtn" bindtap="showmoreopt" data-type="1">显 示 更 多</view>
-
-</block>
-
-
-<!--提供陪伴-->
-<block wx:if="{{type!=3}}">
-  <view class="category">提供陪伴</view>
-
-  <block wx:for="{{provides}}" wx:key="item">
-    <dynamiccom receiveData="{{item}}" />
-  </block>
-  <view class="morebtn" bindtap="showmoreopt" data-type="2">显 示 更 多</view>
-</block>
-
-
-<!--日记部分-->
-<block wx:if="{{type!=2}}">
-  <view class="category">最新动态</view>
+<block wx:if="{{showdata}}">
   <view class="diaryv">
     <view class="leftv">
       <block wx:for="{{diarys}}" wx:key="item" wx:for-index="x">
@@ -40,6 +13,4 @@
       </block>
     </view>
   </view>
-
-  <view class="morebtn" bindtap="showmoreopt" data-type="3">显 示 更 多</view>
 </block>

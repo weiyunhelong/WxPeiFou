@@ -1,11 +1,11 @@
 <!--pages/about/index.wxml-->
 
 <view class="logov">
-  <image src="/resources/logo.png" class="logo"></image>
+  <image src="{{MideaUrl}}{{appinfo.Logo}}" class="logo"></image>
 </view>
-<view class="wxappname">『陪否』</view>
-<view class="slogan">『陪否』—— 即刻找到你正想要的陪伴</view>
+<view class="wxappname">『{{appinfo.Title}}』</view>
+<view class="slogan">{{appinfo.Slogan}}</view>
 
 <view class="line"></view>
 
-<view class="introduce">公司介绍</view>
+<view class="introduce">{{appinfo.Desc}}</view>
