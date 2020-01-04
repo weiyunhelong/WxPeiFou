@@ -265,8 +265,7 @@ Page({
 
         //更新活动状态
         that.UpdateStatus();
-        //获取陪伴信息
-        that.GetDynamicInfo();
+       
         //获取评论信息
         that.GetComments();
         //获取用户信息
@@ -276,8 +275,7 @@ Page({
       
       //更新活动状态
       that.UpdateStatus();
-      //获取陪伴信息
-      that.GetDynamicInfo();
+     
       //获取评论信息
       that.GetComments();
       //获取用户信息
@@ -439,8 +437,12 @@ Page({
     };
     WxRequest.GetRequest(url, params).then(res => {
       console.log("更新活动状态:", res);
+      //获取陪伴信息
+      that.GetDynamicInfo();
     }).catch(res => {
       console.error("更新活动状态报错:", res);
+      //获取陪伴信息
+      that.GetDynamicInfo();
     })
   },
   /**
