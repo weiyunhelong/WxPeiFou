@@ -70,7 +70,17 @@
 </view>
 
 <!--用户评价-->
-<view class="showcomments" bindtap="gocommentopt">用户评价</view>
+<view class="showcomments" bindtap="gocommentopt" wx:if="{{dataobj.Status!=0}}">用户评价</view>
+
+<!--活动结束-->
+<view class="showcomments" bindtap="comfirmend" wx:if="{{dataobj.Status==0&&isowner}}">确认结束</view>
+
+<!--用户评价-->
+<block wx:if="{{dataobj.Status!=0}}">
+  <block wx:for="{{comments}}" wxLkey="item">
+    <commentscom receiveData="{{item}}" />
+  </block>
+</block>
 
 <!--底部操作按钮-->
 <view class="bottomvv"></view>

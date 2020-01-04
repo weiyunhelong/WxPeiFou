@@ -12,7 +12,8 @@ Page({
     hasUserInfo: false,
     avatarUrl: '',
     nickName:'',
-    introduce: ''
+    money: 0,
+    showmodal:false,//提现弹窗提示
   },
 
   /**
@@ -24,6 +25,40 @@ Page({
   gowxlogin() { //前往授权
     wx.navigateTo({
       url: '../wxlogin/auth',
+    })
+  },
+  withdrawopt(){//提现操作
+    var that = this;
+
+    var url = getApp().globalData.DBrequesturl + '/WithdrawMoney';
+    var params = {
+      openid: getApp().globalData.openId,
+      money:that.data.money,
+      name: that.data.nickName
+    };
+    WxRequest.GetRequest(url, params).then(res => {
+      console.log("提现的结果:", res);
+      if(res.data==0){
+        wx.showToast({
+          title: '提现成功',
+        })
+        that.setData({
+          money: 0
+        })
+      }else{
+       that.setData({
+         showmodal:true
+       })
+      }
+    }).catch(res => {
+      console.error("提现报错:", res);
+    })
+  },
+  hideModal(){
+    var that=this;
+
+    that.setData({
+      showmodal: false
     })
   },
   golist(e) { //我发布1；我参与2；我动态3
@@ -106,7 +141,7 @@ Page({
       that.setData({
         avatarUrl: res.data.AvatarUrl,
         nickName: res.data.NickName,
-        introduce: res.data.Introduce,
+        money: res.data.Money == null ? 0 : res.data.Money,
       })
     }).catch(res=>{
       console.error("用户信息报错:", res);

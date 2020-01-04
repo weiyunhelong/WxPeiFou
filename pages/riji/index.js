@@ -19,7 +19,7 @@ Page({
     duration: 1000,
     statusBarHeight: getApp().globalData.statusBarHeight, //自定义顶部状态栏使用
     titleBarHeight: getApp().globalData.titleBarHeight, //自定义顶部状态栏高度
-    comments: [1, 2, 3, 4],
+    comments: [],
     pageindex: 1,
     pagesize: 10,
     imgh: 0,
@@ -183,9 +183,17 @@ Page({
     };
 
     WxRequest.GetRequest(url, params).then(res => {
-      that.setData({
-        comments: res.data
-      })
+      if (that.data.pageindex == 1) {
+        that.setData({
+          comments: res.data
+        })
+      } else {
+        var datalist = that.data.comments;
+        datalist.concat(res.data);
+        that.setData({
+          comments: datalist
+        })
+      }
     }).catch(res => {
       console.error("获取评论失败!", res);
     })

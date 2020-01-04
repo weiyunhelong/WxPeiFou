@@ -4,7 +4,10 @@
   <image src="{{avatarUrl}}" class="tximg"></image>
   <view class="userinfo">
     <view class="nickname">{{nickName}}</view>
-    <view class="desc">{{introduce}}</view>
+    <view class="desc">
+      <view class="money">¥{{money}}</view>
+      <view class="withdraw" bindtap="withdrawopt">提现</view>
+    </view>
   </view>
 </view>
 <view class="topv" wx:if="{{!hasUserInfo}}" bindtap="gowxlogin">
@@ -55,3 +58,12 @@
   <view class="optt">我要反馈</view>
   <image src="/resources/right.png" class="righticon"></image>
 </button>
+
+<!--客服-->
+<button open-type="contact" class="kefubtn">
+  <image src="/resources/kefu.png" class="kefuicon"></image>
+</button>
+
+
+<!--提现弹窗提示-->
+<modalcom receiveData="{{showmodal}}" bindshowChange="hideModal"/>

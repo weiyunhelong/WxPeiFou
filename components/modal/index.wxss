@@ -1,0 +1,80 @@
+/* components/modal/index.wxss */
+
+.model {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /*蒙层的透明度可以自定义*/
+  z-index: 9999999999;
+}
+
+.show {
+  display: block;
+}
+
+.close {
+  display: none;
+}
+
+/*下方可以自定义*/
+
+.model-pack {
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 50%;
+  background: #fff;
+  border-radius: 8px;
+  height: 500rpx;
+}
+
+.model-close {
+  font-size: 40rpx;
+  text-align: right;
+  padding: 20rpx 20rpx;
+}
+
+.closepng {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.model-title {
+  font-size: 36rpx;
+  color: #333;
+  text-align: center;
+  line-height: 50rpx;
+  font-weight: bold;
+}
+
+.model-content {
+  font-size: 28rpx;
+  padding: 40rpx;
+  color: #333;
+  height: 175rpx;
+}
+
+.model-button {
+  font-size: 36rpx;
+  width: 100%;
+  border-radius: 0 0 8px 8px;
+  overflow: hidden;
+  text-align: center;
+  display: flex;
+}
+
+.model-button-confirm {
+  width: 100%;
+  height: 100rpx;
+  line-height: 100rpx;
+  box-sizing: border-box;
+  font-size: 32rpx;
+  color: #fff;
+  background: #ff9800;
+}
+
+.confirm {
+  height: 100rpx;
+  line-height: 100rpx;
+}

@@ -29,6 +29,11 @@ Page({
     dataobj: {}, //详情
     account: 0, //账户余额
     isbook: false, //是否已报名
+    isowner: false, //是否是自己的
+
+    comments: [], //评论的列表
+    pageindex: 1,
+    pagesize: 10
   },
 
   /**
@@ -191,7 +196,7 @@ Page({
     };
     WxRequest.GetRequest(url, params)
       .then(res => {
-        that.GetActivityID(2,bookid);
+        that.GetActivityID(2, bookid);
         wx.showToast({
           title: '报名成功'
         })
@@ -202,6 +207,45 @@ Page({
           icon: 'none'
         })
       })
+  },
+  comfirmend() { //确认活动结束
+    var that = this;
+    wx.showModal({
+      title: '提示',
+      content: '确定陪伴结束?',
+      success: function(res) {
+        if (res.confirm) {
+          that.DynamciEnd();
+        }
+      }
+    })
+  },
+  DynamciEnd() {
+    var that = this;
+
+    //TODO 获取动态的详情
+    var url = getApp().globalData.DBrequesturl + "/DynamciEnd";
+    var params = {
+      id: that.data.id,
+      openid: getApp().globalData.openId
+    };
+
+    WxRequest.GetRequest(url, params).then(res => {
+      if (res.data == 0) {
+        that.GetDynamicInfo();
+      } else {
+        wx.showToast({
+          title: '陪伴结束失败!',
+          icon: 'none'
+        })
+      }
+    }).catch(res => {
+      console.error("陪伴结束失败!", res);
+      wx.showToast({
+        title: '陪伴结束失败!',
+        icon: 'none'
+      })
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
@@ -218,17 +262,25 @@ Page({
 
     if (getApp().globalData.openId == '') {
       getApp().GetWxOpenId().then(res => {
+
+        //更新活动状态
+        that.UpdateStatus();
+        //获取陪伴信息
         that.GetDynamicInfo();
-
+        //获取评论信息
         that.GetComments();
-
+        //获取用户信息
         that.GetWxUserInfo();
       })
     } else {
+      
+      //更新活动状态
+      that.UpdateStatus();
+      //获取陪伴信息
       that.GetDynamicInfo();
-
+      //获取评论信息
       that.GetComments();
-
+      //获取用户信息
       that.GetWxUserInfo();
     }
   },
@@ -238,7 +290,8 @@ Page({
     //TODO 获取动态的详情
     var url = getApp().globalData.DBrequesturl + "/GetDynamicDetail";
     var params = {
-      id: that.data.id
+      id: that.data.id,
+      openId: getApp().globalData.openId
     };
 
     WxRequest.GetRequest(url, params).then(res => {
@@ -259,16 +312,17 @@ Page({
         enddt: res.data.EndDt, //开始时间
         markers: markers, //定点
         isbook: res.data.Isbook == 1, //是否报名
+        isowner: res.data.IsOwner == 1, //是否自己发布
       })
       //获取动态消息ID
       if (res.data.Isbook == 1) {
-        that.GetActivityID(1,0);
+        that.GetActivityID(1, 0);
       }
     }).catch(res => {
       console.error("获取详情失败!", res);
     })
   },
-  GetActivityID(type,bookid) { //获取动态消息ID
+  GetActivityID(type, bookid) { //获取动态消息ID
     var that = this;
 
     var url = getApp().globalData.DBrequesturl + "/GetActivityID";
@@ -284,7 +338,7 @@ Page({
         })
         //更新分享消息的部分
         that.UpdateShareMsg(res.data);
-        if(type==2){
+        if (type == 2) {
           that.UpdateMsgShare(bookid);
         }
       }).catch(res => {
@@ -314,7 +368,7 @@ Page({
     })
 
   },
-  UpdateMsgShare(bookid){//更新动态消息
+  UpdateMsgShare(bookid) { //更新动态消息
     var that = this;
 
     var url = getApp().globalData.DBrequesturl + '/UpdateActivityMsg';
@@ -329,7 +383,31 @@ Page({
     })
   },
   GetComments() { //获取动态评论列表
+    var that = this;
 
+    var url = getApp().globalData.DBrequesturl + '/CommentDynamicList';
+    var params = {
+      id: that.data.id,
+      page: that.data.pageindex,
+      rows: that.data.pagesize
+    };
+    WxRequest.GetRequest(url, params).then(res => {
+      console.log("评论列表:", res);
+      if (that.data.pageindex == 1) {
+        that.setData({
+          comments: res.data
+        })
+      } else {
+        var datalist = that.data.comments;
+        datalist.concat(res.data);
+        that.setData({
+          comments: datalist
+        })
+      }
+
+    }).catch(res => {
+      console.error("评论列表报错:", res);
+    })
   },
   GetWxUserInfo() { //获取用户信息，账户余额
     var that = this;
@@ -349,6 +427,20 @@ Page({
       that.setData({
         account: 0
       })
+    })
+  },
+  //更新活动状态
+  UpdateStatus() {
+    var that = this;
+
+    var url = getApp().globalData.DBrequesturl + '/DynamciTimeOut';
+    var params = {
+      id: that.data.id
+    };
+    WxRequest.GetRequest(url, params).then(res => {
+      console.log("更新活动状态:", res);
+    }).catch(res => {
+      console.error("更新活动状态报错:", res);
     })
   },
   /**
