@@ -1,5 +1,8 @@
 <!--components/search/index.wxml-->
 
+<!-- 引入wxs脚本 -->
+<wxs src="./timeformat.wxs" module="tools" />
+
 <!--搜索框-->
 <view class="searchcv">
   <view class="postiov">
@@ -19,14 +22,14 @@
     </picker>
     <picker mode="time" value="{{starttime}}" bindchange="bindStartTimeChange">
       <view class="picker">
-        {{starttime}}
+        {{tools.timeformat(starttime)}}
       </view>
     </picker>
     <view class="timeline">-</view>
 
     <picker mode="time" value="{{endtime}}" bindchange="bindEndTimeChange">
-      <view class="picker" style="width:100rpx;">
-        {{endtime}}
+      <view class="picker" style="width:100rpx;margin-left:8rpx;">
+        {{tools.timeformat(endtime)}}
       </view>
     </picker>
   </view>

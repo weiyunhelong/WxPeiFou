@@ -72,8 +72,8 @@ Component({
             that.setData({
               city: res.data.result.addressComponent.city
             })
-            getApp().globalData.lat = mapobj.lat;//定位经纬度 
-            getApp().globalData.lng=mapobj.lng;//定位经纬度 
+            getApp().globalData.lat = mapobj.lat; //定位经纬度 
+            getApp().globalData.lng = mapobj.lng; //定位经纬度 
 
           }).catch(res => {
             console.log("获取城市报错:", res);
@@ -108,17 +108,26 @@ Component({
       var date = e.detail.value;
       var dt = utils.getSelectDate(date);
       this.setData({
-        date: dt
+        date: dt,
+        today: date
       })
     },
     bindStartTimeChange(e) { //获取开始时间
-      this.setData({
-        starttime: e.detail.value
+      var that = this;
+      var today = that.data.today;
+      var starttime = today + " " + e.detail.value;
+     
+      that.setData({
+        starttime: starttime
       })
     },
     bindEndTimeChange(e) { //获取结束时间
-      this.setData({
-        endtime: e.detail.value
+      var that = this;
+      var today = that.data.today;
+      var endtime = today + " " + e.detail.value;
+   
+      that.setData({
+        endtime: endtime
       })
     },
     searchopt() { //点击搜索
@@ -133,7 +142,15 @@ Component({
         endtime: that.data.endtime,
       };
 
-      if (that.data.searchtype == 0) {
+      var starttime = new Date(that.data.starttime),
+        endtime = new Date(that.data.endtime);
+      if (starttime > endtime){
+        wx.showToast({
+          title: '开始不大于结束',
+          icon:"none"
+        })
+        return false
+      }else if (that.data.searchtype == 0) {
 
         wx.setStorage({
           key: 'searchopt',

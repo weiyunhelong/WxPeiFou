@@ -174,8 +174,8 @@ Page({
     var params = {
       searchkey: that.data.searchparams.searchkey,
       city: that.data.searchparams.city,
-      startdt: that.data.searchparams.date +" "+ that.data.searchparams.starttime,
-      enddt: that.data.searchparams.date + " "+ that.data.searchparams.endtime,
+      startdt: that.data.searchparams.starttime,
+      enddt: that.data.searchparams.endtime,
       page: 1,
       rows: 5,
       type: 1,
@@ -227,8 +227,8 @@ Page({
     var params = {
       searchkey: that.data.searchparams.searchkey,
       city: that.data.searchparams.city,
-      startdt: that.data.searchparams.date + " " + that.data.searchparams.starttime,
-      enddt: that.data.searchparams.date + " " + that.data.searchparams.endtime,
+      startdt:that.data.searchparams.starttime,
+      enddt:that.data.searchparams.endtime,
       page: 1,
       rows: 4,
       type:1

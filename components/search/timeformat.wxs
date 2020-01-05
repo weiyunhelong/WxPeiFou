@@ -1,0 +1,24 @@
+var dateformat = function (date) {
+
+  var year = getDate(date).getFullYear();
+  var month = getDate(date).getMonth()+1;
+  var day = getDate(date).getDate();
+
+  month = month < 10 ? '0' + month:month;
+  day = day < 10 ? '0' + day : day;
+  return year + "年" + month + "月" + day;
+}
+
+var timeformat = function (date) {
+  var hour = getDate(date).getHours();
+  var min = getDate(date).getMinutes();
+
+  hour = hour < 10 ? '0' + hour : hour;
+  min = min < 10 ? '0' + min : min;
+  return hour + ":" + min;
+}
+// 导出对外暴露的属性
+module.exports = {
+  dateformat: dateformat,
+  timeformat: timeformat
+}

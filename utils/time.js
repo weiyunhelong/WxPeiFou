@@ -32,6 +32,9 @@ function getMorenDate() {
   var year = date.getFullYear();
   var month = date.getMonth() + 1;
   var day = date.getDate();
+ 
+  month = formatNumber(month);
+  day = formatNumber(day);
   return year + '年' + month + '月' + day+'日'
 }
 
@@ -41,6 +44,9 @@ function getSelectDate(riqi) {
   var year = date[0];
   var month = date[1];
   var day = date[2];
+  month = formatNumber(month);
+  day = formatNumber(day);
+  
   return year + '年' + month + '月' + day + '日'
 }
 
@@ -81,18 +87,26 @@ function getCompairDate(start,end) {
 //得到当前的时间 时分秒
 function getNowTime() {
   var date = new Date();
-  var hour = date.getHours()
-  var minute = date.getMinutes()
-  return [hour, minute].map(formatNumber).join(':')
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+
+  var hour = date.getHours();
+  var minute = date.getMinutes();
+  return [year, month, day].map(formatNumber).join('-') + " " + [hour, minute].map(formatNumber).join(':')
 }
 
 //得到当前的时间 时分秒
 function getNowNextTime() {
-  var dt = new Date().getTime() + 1 * 60 * 60 * 1000;   //小时 * 60分钟 * 60秒 * 1000
+  var dt = new Date().getTime() + 9 * 60 * 60 * 1000;   //小时 * 60分钟 * 60秒 * 1000
   var date = new Date(dt);
+  var year = date.getFullYear();
+  var month = date.getMonth() + 1;
+  var day = date.getDate();
+
   var hour = date.getHours();
   var minute = date.getMinutes();
-  return [hour, minute].map(formatNumber).join(':')
+  return [year, month, day].map(formatNumber).join('-') + " "+[hour, minute].map(formatNumber).join(':')
 }
 
 //得到月份的天数

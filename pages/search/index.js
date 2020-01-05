@@ -1,4 +1,7 @@
 // pages/search/index.js
+var utils = require('../../utils/time.js');
+var WxRequest = require('../../utils/WxRequest.js');
+
 Page({
 
   /**
@@ -13,7 +16,7 @@ Page({
       today: "",
       searchtype: 1
     },
-    moretype: 0, //1->寻找 2->提供 3->日记
+    moretype: 1, //1->寻找 2->提供 3->日记
     pageindex: 1,
     pagesize: 10,
     datas: [], //动态的数据
@@ -25,7 +28,7 @@ Page({
   onLoad: function(options) {
     var that = this;
     var moretype = options.type;
-    var searchtype = moretype == undefined ? 0 : parseInt(moretype)
+    var searchtype = moretype == undefined ? 1 : parseInt(moretype)
 
     that.setData({
       moretype: searchtype
@@ -35,21 +38,33 @@ Page({
   searchopt(e) { //搜索操作
 
     var that = this;
+    wx.showLoading({
+      title: '数据加载中...',
+      mask:true
+    })
     var searchparams = {
       searchkey: e.detail.searchkey,
       date: e.detail.date,
       starttime: e.detail.starttime,
       endtime: e.detail.endtime,
-      today: "",
+      today: e.detail.today,
       city: e.detail.city,
       searchtype: 1
     };
+    //赋值参数
+    that.setData({
+      searchparams: searchparams
+    })
 
     if (that.data.moretype == 3) { //日记
       that.GetDiaryList();
     } else { //动态
       that.GetDynamicList();
     }
+
+    setTimeout(function(){
+      wx.hideLoading();
+    },1000)
   },
   GetDynamicList() { //动态列表
     var that = this;
@@ -63,8 +78,8 @@ Page({
     var params = {
       searchkey: searchparams.searchkey,
       city: searchparams.city,
-      startdt: searchparams.date + " " + searchparams.starttime,
-      enddt: searchparams.date + " " + searchparams.endtime,
+      startdt: searchparams.starttime,
+      enddt: searchparams.endtime,
       page: pageindex,
       rows: pagesize,
       type: that.data.moretype,
@@ -74,6 +89,7 @@ Page({
     WxRequest.GetRequest(url, params).then(res => {
 
       if (that.data.pageindex == 1) {
+       
         that.setData({
           datas: res.data
         })
@@ -84,6 +100,7 @@ Page({
           datas: alldata
         })
       }
+      
     }).catch(res => {
       console.error("获取提供陪伴失败", res);
     })
@@ -101,8 +118,8 @@ Page({
     var params = {
       searchkey: searchparams.searchkey,
       city: searchparams.city,
-      startdt: searchparams.date + " " + searchparams.starttime,
-      enddt: searchparams.date + " " + searchparams.endtime,
+      startdt:searchparams.starttime,
+      enddt:searchparams.endtime,
       page: pageindex,
       rows: pagesize,
       type: 2
