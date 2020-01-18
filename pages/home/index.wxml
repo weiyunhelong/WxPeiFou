@@ -4,7 +4,7 @@
   <swiper duration="{{duration}}" interval="{{interval}}" autoplay="{{autoplay}}" indicator-dots="{{true}}" indicator-active-color="#000000" indicator-color="#ffffff" circular="{{true}}" style="height:{{imgh}}rpx;">
     <block wx:for="{{swipers}}" wx:key="item" wx:for-index="x">
       <swiper-item wx:if="{{item!=''}}">
-        <image src="{{MideaUrl}}{{item}}" bindload="{{x==0?'getImgh':''}}" mode="{{x==0?'widthFix':'aspectFit'}}" style="height:{{imgh}}rpx;"></image>
+        <image src="{{MideaUrl}}{{item}}" bindload="{{x==0?'getImgh':''}}" mode="{{x==0?'widthFix':'aspectFit'}}" style="width:100vw;height:{{imgh}}rpx;"></image>
       </swiper-item>
     </block>
   </swiper>
@@ -27,7 +27,9 @@
   <block wx:for="{{provides}}" wx:key="item">
     <dynamiccom receiveData="{{item}}" />
   </block>
+
   <view class="tipv" wx:if="{{provides.length==0}}">暂无提供陪伴!搜索一下，发现更多</view>
+
   <morebtncom receiveData="{{2}}" />
 
   <!--日记部分-->

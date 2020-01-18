@@ -18,20 +18,21 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    var that=this;
+    var that = this;
 
     that.GetAppInfo();
   },
-  GetAppInfo(){
-    var that=this;
+  GetAppInfo() {
+    var that = this;
 
     var url = getApp().globalData.DBrequesturl + '/GetSetInfo';
-    var params = {
-    };
+    var params = {};
     //TODO 后台解密获取手机号码
     WxRequest.PostRequest(url, params).then(res => {
-      console.log("获取系统信息失败:", res);
-    
+      console.log("获取系统信息:", res);
+      that.setData({
+        appinfo: res.data
+      })
 
     }).catch(res => {
       Tools.ShowAlert(2, "获取系统信息失败");
@@ -53,6 +54,7 @@ Page({
   getphonenumber(e) { //手机号码
     var that = this;
 
+
     var url = getApp().globalData.DBrequesturl + '/GetMobile';
     var params = {
       encryptedData: e.detail.encryptedData,
@@ -62,13 +64,20 @@ Page({
     //TODO 后台解密获取手机号码
     WxRequest.GetRequest(url, params).then(res => {
       console.log("手机号码:", res);
-      that.setData({
-        phone: res.data
-      })
-      Tools.ShowAlert(1, "手机号获取成功");
-
+      if (res.data.Message == "发生错误。") {
+        that.setData({
+          phone: ''
+        })
+      } else {
+        that.setData({
+          phone: res.data
+        })
+        Tools.ShowAlert(1, "手机号获取成功");
+      }
     }).catch(res => {
-
+      that.setData({
+        phone: ''
+      })
       Tools.ShowAlert(2, "手机号获取失败");
     })
 
@@ -94,7 +103,7 @@ Page({
       Tools.ShowAlert(0, "请完善个人简介");
     } else {
       //TODO 提交数据，返回前一个页面
-      var url = getApp().globalData.DBrequesturl +'/SaveWxUser';
+      var url = getApp().globalData.DBrequesturl + '/SaveWxUser';
       var userInfo = getApp().globalData.userInfo;
       var parmas = {
         openid: getApp().globalData.openId,

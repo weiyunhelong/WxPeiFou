@@ -16,7 +16,7 @@
 
 .userinfo {
   width: 450rpx;
-  padding-top: 48rpx;
+  padding-top: 30rpx;
 }
 
 .nickname {
@@ -46,7 +46,7 @@
 .tipt {
   font-size: 24rpx;
   color: #adaeae;
-  padding-top: 70rpx;
+  padding-top: 38rpx;
 }
 
 .tip {

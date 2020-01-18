@@ -70,8 +70,8 @@ App({
     hasUserInfo: false, //用户信息是否完整
     userInfo: null, //微信用户信息
     AddressApi: "https://api.map.baidu.com", //根据经纬度获取城市
-    DBrequesturl: "http://localhost:6348/api/DataApi", //API接口
-    MideaUrl: "http://localhost:6348", //服务器素材接口
+    DBrequesturl: "https://www.peifou.net/api/DataApi", //API接口
+    MideaUrl: "https://www.peifou.net", //服务器素材接口
     openId: "", //OPENID
     Token:'',//session_key
     unionid: '', //unionid

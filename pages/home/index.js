@@ -185,7 +185,7 @@ Page({
     WxRequest.GetRequest(url, params).then(res => {
      
       that.setData({
-        looks:res.data
+        looks: res.data == "-1" ? [] : res.data
       })
 
     }).catch(res => {
@@ -201,8 +201,8 @@ Page({
     var params = {
       searchkey: that.data.searchparams.searchkey,
       city: that.data.searchparams.city,
-      startdt: that.data.searchparams.date + " " + that.data.searchparams.starttime,
-      enddt: that.data.searchparams.date + " " + that.data.searchparams.endtime,
+      startdt: that.data.searchparams.starttime,
+      enddt: that.data.searchparams.endtime,
       page: 1,
       rows: 5,
       type: 2,
@@ -210,9 +210,9 @@ Page({
       lng: getApp().globalData.lng,
     };
     WxRequest.GetRequest(url, params).then(res => {
-
+    
       that.setData({
-        provides: res.data
+        provides: res.data == "-1" ? [] : res.data
       })
 
     }).catch(res => {
